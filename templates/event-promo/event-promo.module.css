@@ -1,0 +1,2 @@
+.speaker { @apply rounded-xl bg-white shadow border border-black/10 p-3 flex gap-3 items-center; }
+.speaker img { @apply rounded-lg object-cover; }

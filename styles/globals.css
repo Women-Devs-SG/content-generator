@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --wdsg-teal: #0B6E4F;
+  --wdsg-coral: #CF5333;
+  --wdsg-yellow: #FFAE03;
+  --wdsg-navy: #05299E;
+  --wdsg-offwhite: #FFFBFF;
+}
+
+html, body, #__next {
+  height: 100%;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  margin-left: 70px;
+  line-height: 0.9;
+  font-family: 'Montserrat', sans-serif;
+  color: #FFF;
+}
+.logo .women { 
+  font-weight: 700; 
+  font-size: 58px; 
+  color: var(--wdsg-navy); 
+}
+.logo .devs { 
+  font-weight: 700; 
+  font-size: 90px; 
+  color: var(--wdsg-navy); 
+}
+.logo .singapore { 
+  font-weight: 400; 
+  font-size: 42px; 
+  color: var(--wdsg-navy); 
+}
+
+.badge { 
+  display: inline-block; 
+  padding: 4px 10px; 
+  margin: 2px; 
+  border-radius: 999px; 
+  font-size: 25px; 
+  background: #F5F5F5; 
+  color: #212121; 
+  opacity: 0.7
+}
+
+.badge.women-only { background: var(--wdsg-coral); color: white; }
+.badge.allies { background: var(--wdsg-navy); color: white; }
+.badge.childcare { background: var(--wdsg-yellow); color: white; }
+.badge.family { background: var(--wdsg-teal); color: white; }
+
+.badge.open-issues { background: var(--wdsg-navy); color: white; }
+.badge.merged-prs { background: var(--wdsg-teal); color: white; }
+.badge.good-first-issues { background: var(--wdsg-yellow); color: white; }
