@@ -27,7 +27,7 @@ export default function Home() {
     { name: '🍼bibsnbub', description: 'An app to help parents find childcare facilities in Singapore!', stars: 11, forks: 14 },
     { name: '👩‍💻womendevssg', description: 'Website for womendevssg', stars: 14, forks: 18 },
   ])
-  const [hackTitleText, setHackTitleText] = useState('👨‍💻Hacktoberfest🎉')
+  const [hackTitleText, setHackTitleText] = useState('Hacktoberfest🎉')
   const [hackSubtitleText, setHackSubtitleText] = useState('📅1–31 October')
   const [hackLinkText, setHackLinkText] = useState('👉github.com/orgs/Women-Devs-SG👈')
 
@@ -48,6 +48,7 @@ export default function Home() {
   const [partnerLogos, setPartnerLogos] = useState<string[]>(['', ''])
   const [ctaText, setCtaText] = useState('Sign up on Meetup')
   const [eventLinkText, setEventLinkText] = useState('👉meetup.com/women-devs-sg/👈')
+  const [decorVariant, setDecorVariant] = useState<'playful' | 'tech' | 'games' | 'women'>('playful')
 
   // Logo customization (applies to all templates)
   type RootColor = 'teal' | 'coral' | 'yellow' | 'navy' | 'offwhite' | 'black'
@@ -147,6 +148,20 @@ export default function Home() {
               {platforms.map((p) => (
                 <Button key={p.key} variant={platform === p.key ? 'default' : 'outline'} onClick={() => setPlatform(p.key)}>
                   {p.label}
+                </Button>
+              ))}
+            </div>
+
+            <div className="mt-4 font-semibold">Background Decor</div>
+            <div className="mt-2 flex flex-wrap gap-2">
+              {([
+                { key: 'playful', label: 'Shapes' },
+                { key: 'tech', label: 'Tech Emojis' },
+                { key: 'games', label: 'Game Emojis' },
+                { key: 'women', label: 'Women Emojis' },
+              ] as const).map((opt) => (
+                <Button key={opt.key} variant={decorVariant === opt.key ? 'default' : 'outline'} onClick={() => setDecorVariant(opt.key)}>
+                  {opt.label}
                 </Button>
               ))}
             </div>
@@ -468,7 +483,7 @@ export default function Home() {
           <div className="md:col-span-2 rounded-xl border bg-white p-4">
             <ScaledPreview width={platformSizes[platform].width} height={platformSizes[platform].height}>
               {template === 'hacktoberfest' && (
-                <Hacktoberfest platform={platform} repos={repos} titleText={hackTitleText} subtitleText={hackSubtitleText} bgColor={hackBgColor} ctaColor={hackCtaColor} titleColor={hackTitleColor} linkText={hackLinkText} logoColors={logoColors} />
+                <Hacktoberfest platform={platform} repos={repos} titleText={hackTitleText} subtitleText={hackSubtitleText} bgColor={hackBgColor} ctaColor={hackCtaColor} titleColor={hackTitleColor} linkText={hackLinkText} logoColors={logoColors} decorVariant={decorVariant} />
               )}
               {template === 'event-promo' && (
                 <EventPromo
@@ -491,6 +506,7 @@ export default function Home() {
                   nursingBadgeColor={nursingBadgeColor}
                   parentsBadgeColor={parentsBadgeColor}
                   logoColors={logoColors}
+                  decorVariant={decorVariant}
                 />
               )}
             </ScaledPreview>

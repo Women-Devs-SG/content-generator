@@ -30,6 +30,7 @@ type Props = {
   nursingBadgeColor?: RootColor,
   parentsBadgeColor?: RootColor,
   womenBadgeColor?: RootColor,
+  decorVariant?: 'playful' | 'tech' | 'games' | 'women',
 }
 
 export default function EventPromo({
@@ -54,6 +55,7 @@ export default function EventPromo({
   parentsBadgeColor = 'yellow',
   womenBadgeColor = 'coral',
   linkText = '👉meetup.com/women-devs-sg/👈',
+  decorVariant = 'playful',
 }: Props) {
   const size = platformSizes[platform]
   const type = getTypeScale(platform)
@@ -130,9 +132,48 @@ export default function EventPromo({
         style={{ width: size.width, height: size.height }}
         className={`relative overflow-hidden rounded-2xl border ${bgClass[bgColor]}`}
       >
-        <ShapeDecor />
+        {isStory ? (
+          <div className="absolute inset-0 z-0 flex flex-col">
+            <div className="h-1/2">
+              <ShapeDecor absolute={false} variant={decorVariant} />
+            </div>
+            <div className="h-1/2">
+              <ShapeDecor absolute={false} variant={decorVariant} />
+            </div>
+          </div>
+        ) : isMeetup ? (
+          <div className="absolute inset-0 z-0 flex flex-row">
+            <div className="w-1/2 h-full">
+              <ShapeDecor absolute={false} variant={decorVariant} />
+            </div>
+            <div className="w-1/2 h-full">
+              <ShapeDecor absolute={false} variant={decorVariant} />
+            </div>
+          </div>
+        ) : isLinkedIn ? (
+          decorVariant === 'playful' ? (
+            <div className="absolute inset-0 z-0 flex flex-row">
+              <div className="w-1/4 h-full">
+                <ShapeDecor absolute={false} variant={decorVariant} />
+              </div>
+              <div className="w-1/4 h-full">
+                <ShapeDecor absolute={false} variant={decorVariant} />
+              </div>
+              <div className="w-1/4 h-full">
+                <ShapeDecor absolute={false} variant={decorVariant} />
+              </div>
+              <div className="w-1/4 h-full">
+                <ShapeDecor absolute={false} variant={decorVariant} />
+              </div>
+            </div>
+          ) : (
+            <ShapeDecor variant={decorVariant} />
+          )
+        ) : (
+          <ShapeDecor variant={decorVariant} />
+        )}
         
-        <div className={`absolute inset-0 z-20 p-6 flex flex-col pointer-events-auto ${isStory ? 'justify-center' : ''}`}>
+        <div className={`absolute inset-0 z-20 ${isLinkedIn ? 'p-1' : 'p-6'} flex flex-col pointer-events-auto ${isStory ? 'justify-center' : ''}`}>
           <div className="mt-4 flex items-start gap-4">
             <h1 className={`font-bold ${textClass[titleColor]} flex-1 min-w-0`} style={{ fontSize: type.headline, lineHeight: '1' }}>{eventName}</h1>
             <div className={`reset-logo-margin ${isStory ? 'overflow-hidden scale-75 origin-top-left' : isIG ? 'overflow-hidden scale-90 origin-top-right' : ''}`}>
@@ -140,12 +181,12 @@ export default function EventPromo({
             </div>
           </div>
           {eventSubtitle && (
-            <p className={`mt-1 ${darkBg ? 'text-white' : 'text-gray-800'}`} style={{ fontSize: type.body }}>{eventSubtitle}</p>
+            <p className={`${isLinkedIn ? 'mt-1' : 'mt-1'} ${darkBg ? 'text-white' : 'text-gray-800'}`} style={{ fontSize: type.body }}>{eventSubtitle}</p>
           )}
           {eventDescription && <p className={`mt-2 max-w-prose ${darkBg ? 'text-white' : 'text-gray-800'}`} style={{ fontSize: type.caption }}>{eventDescription}</p>}
 
-          <div className="mt-4 flex gap-4">
-            <div className="flex-1 min-w-0 flex">
+          <div className={`mt-4 flex ${isStory ? 'flex-col gap-4' : 'gap-4'}`}>
+            <div className={`${isStory ? 'w-full' : 'flex-1'} min-w-0 flex`}>
               <div className="flex-1 flex flex-col justify-center">
                 <div className={`grid grid-cols-1 gap-3`}>
                   {speakers.map((s: Speaker, i: number) => (
@@ -170,12 +211,12 @@ export default function EventPromo({
                 </div>
               </div>
             </div>
-            <div className="w-[min(40%)] flex flex-col items-end text-right gap-3">
+            <div className={`${isStory ? 'w-full items-center text-left mt-10 mb-10' : 'w-[min(40%)] items-end text-right'} flex flex-col gap-3`}>
               <div className={`${darkBg ? 'text-white' : 'text-gray-800'}`} style={{ fontSize: type.body }}>
                 <div className="font-semibold">📅{eventDateTime}</div>
                 <div className={`${darkBg ? 'text-white' : 'text-gray-800'}`}>📍{eventVenue}</div>
               </div>
-              <div className="flex flex-wrap justify-end items-center gap-2 pointer-events-auto">
+              <div className={`flex flex-wrap ${isStory ? 'justify-center' : 'justify-end'} items-center gap-2 pointer-events-auto`}>
                 {audienceType === 'Women only' && (
                   <span
                     className={`inline-block px-[10px] py-[4px] m-[2px] rounded-full text-[25px] select-none`}
@@ -232,10 +273,10 @@ export default function EventPromo({
 
           {/* CTA below the speaker cards */}
           <div className="mt-6 flex flex-col items-center">
-            <a href={ctaHref} className={`rounded-full ${bgClass[ctaColor]} ${isIG || isStory ? 'px-10 py-5 text-2xl' : isLinkedIn ? 'px-7 py-3 text-lg' : isMeetup ? 'hidden' : 'px-8 py-4 text-xl'} text-white font-semibold`}>
+              <div className={`rounded-full ${bgClass[ctaColor]} ${isStory ? 'text4xl' : 'text2xl' } ${ctaColor==='offwhite' ? 'text-gray-800' : 'text-white'} ${isStory ? 'gap-3 px-20 py-5' : 'px-10 py-5'} font-semibold inline-flex items-center`} style={{ fontSize: isStory ? type.body : undefined }}>
               {ctaText}
-            </a>
-            <div className={`mt-2 ${darkBg ? 'text-white' : 'text-gray-800'} text-base text-xl`}>{linkText}</div>
+            </div>
+            <div className={`${isStory ? 'mt-10' : 'mt-2'} ${darkBg ? 'text-white' : 'text-gray-800'} text-3xl`} style={{ fontSize: isStory ? type.body : undefined }}>{linkText}</div>
           </div>
 
           <div className="mt-auto flex items-end justify-start absolute bottom-4 right-0 pointer-events-none">

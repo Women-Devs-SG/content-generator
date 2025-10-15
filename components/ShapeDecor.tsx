@@ -1,17 +1,46 @@
 import React from 'react'
 
-type Variant = 'playful' | 'circles' | 'bars' | 'grid'
-type Props = { variant?: Variant }
+type Variant = 'playful' | 'circles' | 'bars' | 'grid' | 'tech' | 'games' | 'women'
+type Props = { variant?: Variant; absolute?: boolean }
 
-export default function ShapeDecor({ variant = 'playful' }: Props) {
+export default function ShapeDecor({ variant = 'playful', absolute = true }: Props) {
+  const containerClass = `${absolute ? 'absolute inset-0 z-0' : ''} h-full w-full pointer-events-none`
+
+  const renderEmojiTiled = (emojis: string[]) => {
+    // Simple tiled grid of emojis
+    const cols = 5
+    const rows = 5
+    const cells = cols * rows // 5x5 grid
+    return (
+      <div className={containerClass} aria-hidden>
+        <div className="grid h-full w-full" style={{ gridTemplateColumns: `repeat(${cols}, 1fr)`, gridTemplateRows: `repeat(${rows}, 1fr)`, gap: 16 }}>
+          {Array.from({ length: cells }).map((_, i) => (
+            <div key={i} className="flex items-center justify-center" style={{ opacity: 0.16 }}>
+              <span style={{ fontSize: 56, lineHeight: 1 }}>{emojis[i % emojis.length]}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  if (variant === 'tech') {
+    return renderEmojiTiled(['🤖', '💻', '🖱️', '⌨️', '👩‍💻', '🖥️'])
+  }
+  if (variant === 'games') {
+    return renderEmojiTiled(['👾', '🕹️', '🃏', '🎱', '🀄'])
+  }
+  if (variant === 'women') {
+    return renderEmojiTiled(['👩', '👩‍💻', '❤️', '💃', '🌹'])
+  }
   if (variant === 'playful') {
     return (
       <svg
         aria-hidden
-        className="absolute inset-0 z-0 h-full w-full pointer-events-none"
+        className={containerClass}
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 1000 1000"
-        preserveAspectRatio="xMidYMid meet"
+        preserveAspectRatio={absolute ? 'xMidYMid meet' : 'none'}
       >
         <g opacity="0.16">
           {/* Big circle top-left (teal) */}
@@ -46,7 +75,7 @@ export default function ShapeDecor({ variant = 'playful' }: Props) {
 
   // Fallback simple variants
   return (
-    <svg aria-hidden className="absolute inset-0 z-0 h-full w-full opacity-10" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1000 1000">
+    <svg aria-hidden className={`${absolute ? 'absolute inset-0 z-0' : ''} h-full w-full opacity-10`} xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1000 1000">
       {variant === 'circles' && (
         <defs>
           <pattern id="dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
