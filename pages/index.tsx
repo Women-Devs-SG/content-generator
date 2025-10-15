@@ -47,7 +47,7 @@ export default function Home() {
   const [facilities, setFacilities] = useState<string[]>(['Private nursing room', 'Parents & kids welcome'])
   const [partnerLogos, setPartnerLogos] = useState<string[]>(['', ''])
   const [ctaText, setCtaText] = useState('Sign up on Meetup')
-  const [eventLinkText] = useState<string>('👉meetup.com/women-devs-sg/👈')
+  const [eventLinkText, setEventLinkText] = useState<string>('👉meetup.com/women-devs-sg/👈')
   const [decorVariant, setDecorVariant] = useState<'playful' | 'tech' | 'games' | 'women'>('playful')
 
   // Logo customization (applies to all templates)
@@ -73,6 +73,7 @@ export default function Home() {
   const [alliesBadgeColor, setAlliesBadgeColor] = useState<RootColor>('navy')
   const [nursingBadgeColor, setNursingBadgeColor] = useState<RootColor>('navy')
   const [parentsBadgeColor, setParentsBadgeColor] = useState<RootColor>('navy')
+  const [nonCodersBadgeColor, setNonCodersBadgeColor] = useState<RootColor>('navy')
 
   const fileBase = `${template}-${platform}`
   const palette: LogoColor[] = ['teal','coral','yellow','navy','offwhite']
@@ -362,6 +363,17 @@ export default function Home() {
                     </div>
                   </div>
                   <div>
+                    <div className="font-semibold">Badges: Non-coders</div>
+                    <div className="mt-1 flex flex-wrap gap-2">
+                      {eventOtherOptions.map((c) => (
+                        <button key={c} type="button" onClick={() => setNonCodersBadgeColor(c)} className={`flex items-center gap-2 rounded border px-2 py-1 ${nonCodersBadgeColor===c?'border-black':'border-gray-300'}`}>
+                          <span className={`inline-block h-4 w-4 rounded ${colorBgClass[c]}`} />
+                          <span>{c}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
                     <div className="font-semibold">Logo</div>
                     <div className="mt-1 grid grid-cols-3 gap-2">
                       <div>
@@ -446,7 +458,7 @@ export default function Home() {
                 <div>
                   <div className="font-semibold">Facilities</div>
                   <div className="mt-2 grid grid-cols-1 gap-2 text-sm">
-                    {['Private nursing room', 'Parents & kids welcome'].map((f) => (
+                    {['Private nursing room', 'Parents & kids welcome', 'Non-coders welcome'].map((f) => (
                       <label key={f} className="flex items-center gap-2">
                         <input type="checkbox" checked={facilities.includes(f)} onChange={(e) => setFacilities((prev: string[]) => e.target.checked ? [...prev, f] : prev.filter((x) => x !== f))} />
                         <span>{f}</span>
@@ -469,6 +481,7 @@ export default function Home() {
                   <div className="font-semibold">CTA</div>
                   <div className="mt-2 grid grid-cols-1 gap-2">
                     <input className="w-full rounded border px-2 py-1" placeholder="CTA text" value={ctaText} onChange={(e) => setCtaText(e.target.value)} />
+                    <input className="w-full rounded border px-2 py-1" placeholder="Link text (optional)" value={eventLinkText} onChange={(e) => setEventLinkText(e.target.value)} />
                   </div>
                 </div>
               </div>
@@ -501,10 +514,11 @@ export default function Home() {
                   bgColor={eventBgColor}
                   ctaColor={eventCtaColor}
                   titleColor={eventTitleColor}
-                  linkText={eventLinkText}
+                  linkText={eventLinkText || undefined}
                   alliesBadgeColor={alliesBadgeColor}
                   nursingBadgeColor={nursingBadgeColor}
                   parentsBadgeColor={parentsBadgeColor}
+                  nonCodersBadgeColor={nonCodersBadgeColor}
                   logoColors={logoColors}
                   decorVariant={decorVariant}
                 />

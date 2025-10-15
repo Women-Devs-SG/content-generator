@@ -29,6 +29,7 @@ type Props = {
   nursingBadgeColor?: RootColor,
   parentsBadgeColor?: RootColor,
   womenBadgeColor?: RootColor,
+  nonCodersBadgeColor?: RootColor,
   decorVariant?: 'playful' | 'tech' | 'games' | 'women',
 }
 
@@ -52,6 +53,7 @@ export default function EventPromo({
   nursingBadgeColor = 'teal',
   parentsBadgeColor = 'yellow',
   womenBadgeColor = 'coral',
+  nonCodersBadgeColor = 'teal',
   linkText = '👉meetup.com/women-devs-sg/👈',
   decorVariant = 'playful',
 }: Props) {
@@ -96,6 +98,7 @@ export default function EventPromo({
   const [alliesColor, setAlliesColor] = useState<RootColor>(alliesBadgeColor)
   const [nursingColor, setNursingColor] = useState<RootColor>(nursingBadgeColor)
   const [parentsColor, setParentsColor] = useState<RootColor>(parentsBadgeColor)
+  const [nonCodersColor, setNonCodersColor] = useState<RootColor>(nonCodersBadgeColor)
   const cycle = (current: RootColor): RootColor => {
     const idx = badgeOptions.indexOf(current)
     return badgeOptions[(idx + 1) % badgeOptions.length] || current
@@ -106,6 +109,7 @@ export default function EventPromo({
     if (alliesColor === bgColor && badgeOptions.length) setAlliesColor(badgeOptions[0])
     if (nursingColor === bgColor && badgeOptions.length) setNursingColor(badgeOptions[0])
     if (parentsColor === bgColor && badgeOptions.length) setParentsColor(badgeOptions[0])
+    if (nonCodersColor === bgColor && badgeOptions.length) setNonCodersColor(badgeOptions[0])
   }, [bgColor])
 
   // Sync internal colors when external props (sidebar toggles) change
@@ -121,6 +125,10 @@ export default function EventPromo({
     console.log('Prop change: parentsBadgeColor ->', parentsBadgeColor)
     setParentsColor(parentsBadgeColor)
   }, [parentsBadgeColor])
+  useEffect(() => {
+    console.log('Prop change: nonCodersBadgeColor ->', nonCodersBadgeColor)
+    setNonCodersColor(nonCodersBadgeColor)
+  }, [nonCodersBadgeColor])
 
   return (
     <div className="flex flex-col gap-3">
@@ -236,6 +244,20 @@ export default function EventPromo({
                     Allies: Bring a 👩 Friend
                   </button>
                 )}
+                {facilities?.includes('Non-coders welcome') && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const next = cycle(nonCodersColor)
+                      console.log('Non-coders badge click', { current: nonCodersColor, next })
+                      setNonCodersColor(next)
+                    }}
+                    className={`inline-block px-[10px] py-[4px] m-[2px] rounded-full text-[25px] cursor-pointer pointer-events-auto`}
+                    style={{ backgroundColor: colorVar[nonCodersColor], color: textOnBg(nonCodersColor), opacity: 1 }}
+                  >
+                    Non-coders Welcome 🙌
+                  </button>
+                )}
                 {facilities?.includes('Private nursing room') && (
                   <button
                     type="button"
@@ -270,17 +292,19 @@ export default function EventPromo({
 
           {/* CTA below the speaker cards */}
           <div className="mt-6 flex flex-col items-center">
-              <div className={`rounded-full ${bgClass[ctaColor]} ${isStory ? 'text4xl' : 'text2xl' } ${ctaColor==='offwhite' ? 'text-gray-800' : 'text-white'} ${isStory ? 'gap-3 px-20 py-5' : 'px-10 py-5'} font-semibold inline-flex items-center`} style={{ fontSize: isStory ? type.body : undefined }}>
+            <div className={`rounded-full ${bgClass[ctaColor]} ${isStory ? 'text4xl' : 'text2xl' } ${ctaColor==='offwhite' ? 'text-gray-800' : 'text-white'} ${isStory ? 'gap-3 px-20 py-5' : 'px-10 py-5'} font-semibold inline-flex items-center justify-center text-center`} style={{ fontSize: isStory ? type.body : undefined }}>
               {ctaText}
             </div>
-            <div className={`${isStory ? 'mt-10' : 'mt-2'} ${darkBg ? 'text-white' : 'text-gray-800'} text-3xl`} style={{ fontSize: isStory ? type.body : undefined }}>{linkText}</div>
+            {linkText && (
+              <div className={`${isStory ? 'mt-10' : 'mt-2'} ${darkBg ? 'text-white' : 'text-gray-800'} text-3xl text-center`} style={{ fontSize: isStory ? type.body : undefined }}>{linkText}</div>
+            )}
           </div>
 
           <div className="mt-auto flex items-end justify-start absolute bottom-4 right-0 pointer-events-none">
             {partnerLogos.length > 0 && (
               <div className="flex items-center justify-start gap-3">
                 {partnerLogos.map((src, i) => (
-                  <img key={i} src={src} alt="partner logo" className="h-20 w-auto object-contain" />
+                  <img key={i} src={src} alt="partner logo" className="h-28 w-auto object-contain" />
                 ))}
               </div>
             )}
