@@ -1,3 +1,5 @@
+import React from 'react'
+
 type Variant = 'playful' | 'circles' | 'bars' | 'grid'
 type Props = { variant?: Variant }
 

@@ -1,4 +1,5 @@
-import { useMemo, useRef, useState, useEffect } from 'react'
+import React from 'react'
+import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import { platformSizes, type PlatformKey } from '@/lib/platformSizes'
 import Hacktoberfest, { type RepoCard } from '@/templates/hacktoberfest'
@@ -36,7 +37,7 @@ export default function Home() {
   const [eventDescription, setEventDescription] = useState('Join us for a panel and networking session on building inclusive tech communities.')
   const [eventDateTime, setEventDateTime] = useState('Thu, 24 Oct · 7:00 PM')
   const [eventVenue, setEventVenue] = useState('Somewhere, Singapore')
-  const [speakerCount, setSpeakerCount] = useState<1 | 2 | 3>(3)
+  const [speakerCount, setSpeakerCount] = useState<1 | 2 | 3>(1)
   const [speakers, setSpeakers] = useState<Speaker[]>([
     { name: 'Aisha Lee', title: 'Senior Engineer, ACME', imageUrl: '' },
     { name: 'Mei Chen', title: 'Developer Advocate, Foo', imageUrl: '' },
@@ -46,7 +47,7 @@ export default function Home() {
   const [facilities, setFacilities] = useState<string[]>(['Private nursing room', 'Parents & kids welcome'])
   const [partnerLogos, setPartnerLogos] = useState<string[]>(['', ''])
   const [ctaText, setCtaText] = useState('Sign up on Meetup')
-  const [ctaHref, setCtaHref] = useState('https://www.meetup.com/women-devs-sg/')
+  const [eventLinkText, setEventLinkText] = useState('👉meetup.com/women-devs-sg/👈')
 
   // Logo customization (applies to all templates)
   type RootColor = 'teal' | 'coral' | 'yellow' | 'navy' | 'offwhite' | 'black'
@@ -68,17 +69,16 @@ export default function Home() {
   const [eventBgColor, setEventBgColor] = useState<RootColor>('offwhite')
   const [eventCtaColor, setEventCtaColor] = useState<RootColor>('coral')
   const [eventTitleColor, setEventTitleColor] = useState<RootColor>('navy')
-  const [eventLinkText, setEventLinkText] = useState('👉meetup.com/women-devs-sg/👈')
   const [alliesBadgeColor, setAlliesBadgeColor] = useState<RootColor>('navy')
   const [nursingBadgeColor, setNursingBadgeColor] = useState<RootColor>('navy')
   const [parentsBadgeColor, setParentsBadgeColor] = useState<RootColor>('navy')
 
   const fileBase = `${template}-${platform}`
-  const palette: RootColor[] = ['teal','coral','yellow','navy','offwhite']
-  const hackOtherOptions = palette.filter((c) => c !== hackBgColor)
-  const eventOtherOptions = palette.filter((c) => c !== eventBgColor)
-  const hackLogoOptions = palette.filter((c) => c !== hackBgColor)
-  const eventLogoOptions = palette.filter((c) => c !== eventBgColor)
+  const palette: LogoColor[] = ['teal','coral','yellow','navy','offwhite']
+  const hackOtherOptions: LogoColor[] = palette.filter((c) => c !== hackBgColor)
+  const eventOtherOptions: LogoColor[] = palette.filter((c) => c !== eventBgColor)
+  const hackLogoOptions: LogoColor[] = palette.filter((c) => c !== hackBgColor)
+  const eventLogoOptions: LogoColor[] = palette.filter((c) => c !== eventBgColor)
 
   // Ensure dependent colors never match the selected background color
   useEffect(() => {
@@ -114,9 +114,9 @@ export default function Home() {
     const options = template === 'hacktoberfest' ? hackLogoOptions : eventLogoOptions
     setLogoColors((cur) => {
       const next = { ...cur }
-      if (next.women === currentBg && options.length) next.women = options[0] as any
-      if (next.devs === currentBg && options.length) next.devs = options[0] as any
-      if (next.singapore === currentBg && options.length) next.singapore = options[0] as any
+      if (next.women === currentBg && options.length) next.women = options[0]
+      if (next.devs === currentBg && options.length) next.devs = options[0]
+      if (next.singapore === currentBg && options.length) next.singapore = options[0]
       return next
     })
   }, [template, hackBgColor, eventBgColor])
@@ -204,7 +204,7 @@ export default function Home() {
                         <div>WOMEN color</div>
                         <div className="mt-1 flex flex-wrap gap-2">
                           {hackLogoOptions.map((c) => (
-                            <button key={c} type="button" onClick={() => setLogoColors((cur) => ({ ...cur, women: c as any }))} className={`flex items-center gap-2 rounded border px-2 py-1 ${logoColors.women===c?'border-black':'border-gray-300'}`}>
+                            <button key={c} type="button" onClick={() => setLogoColors((cur) => ({ ...cur, women: c }))} className={`flex items-center gap-2 rounded border px-2 py-1 ${logoColors.women===c?'border-black':'border-gray-300'}`}>
                               <span className={`inline-block h-4 w-4 rounded ${colorBgClass[c]}`} />
                               <span>{c}</span>
                             </button>
@@ -215,7 +215,7 @@ export default function Home() {
                         <div>DEVS color</div>
                         <div className="mt-1 flex flex-wrap gap-2">
                           {hackLogoOptions.map((c) => (
-                            <button key={c} type="button" onClick={() => setLogoColors((cur) => ({ ...cur, devs: c as any }))} className={`flex items-center gap-2 rounded border px-2 py-1 ${logoColors.devs===c?'border-black':'border-gray-300'}`}>
+                            <button key={c} type="button" onClick={() => setLogoColors((cur) => ({ ...cur, devs: c }))} className={`flex items-center gap-2 rounded border px-2 py-1 ${logoColors.devs===c?'border-black':'border-gray-300'}`}>
                               <span className={`inline-block h-4 w-4 rounded ${colorBgClass[c]}`} />
                               <span>{c}</span>
                             </button>
@@ -226,7 +226,7 @@ export default function Home() {
                         <div>SINGAPORE color</div>
                         <div className="mt-1 flex flex-wrap gap-2">
                           {hackLogoOptions.map((c) => (
-                            <button key={c} type="button" onClick={() => setLogoColors((cur) => ({ ...cur, singapore: c as any }))} className={`flex items-center gap-2 rounded border px-2 py-1 ${logoColors.singapore===c?'border-black':'border-gray-300'}`}>
+                            <button key={c} type="button" onClick={() => setLogoColors((cur) => ({ ...cur, singapore: c }))} className={`flex items-center gap-2 rounded border px-2 py-1 ${logoColors.singapore===c?'border-black':'border-gray-300'}`}>
                               <span className={`inline-block h-4 w-4 rounded ${colorBgClass[c]}`} />
                               <span>{c}</span>
                             </button>
@@ -353,7 +353,7 @@ export default function Home() {
                         <div>WOMEN color</div>
                         <div className="mt-1 flex flex-wrap gap-2">
                           {eventLogoOptions.map((c) => (
-                            <button key={c} type="button" onClick={() => setLogoColors((cur) => ({ ...cur, women: c as any }))} className={`flex items-center gap-2 rounded border px-2 py-1 ${logoColors.women===c?'border-black':'border-gray-300'}`}>
+                            <button key={c} type="button" onClick={() => setLogoColors((cur) => ({ ...cur, women: c }))} className={`flex items-center gap-2 rounded border px-2 py-1 ${logoColors.women===c?'border-black':'border-gray-300'}`}>
                               <span className={`inline-block h-4 w-4 rounded ${colorBgClass[c]}`} />
                               <span>{c}</span>
                             </button>
@@ -364,7 +364,7 @@ export default function Home() {
                         <div>DEVS color</div>
                         <div className="mt-1 flex flex-wrap gap-2">
                           {eventLogoOptions.map((c) => (
-                            <button key={c} type="button" onClick={() => setLogoColors((cur) => ({ ...cur, devs: c as any }))} className={`flex items-center gap-2 rounded border px-2 py-1 ${logoColors.devs===c?'border-black':'border-gray-300'}`}>
+                            <button key={c} type="button" onClick={() => setLogoColors((cur) => ({ ...cur, devs: c }))} className={`flex items-center gap-2 rounded border px-2 py-1 ${logoColors.devs===c?'border-black':'border-gray-300'}`}>
                               <span className={`inline-block h-4 w-4 rounded ${colorBgClass[c]}`} />
                               <span>{c}</span>
                             </button>
@@ -375,7 +375,7 @@ export default function Home() {
                         <div>SINGAPORE color</div>
                         <div className="mt-1 flex flex-wrap gap-2">
                           {eventLogoOptions.map((c) => (
-                            <button key={c} type="button" onClick={() => setLogoColors((cur) => ({ ...cur, singapore: c as any }))} className={`flex items-center gap-2 rounded border px-2 py-1 ${logoColors.singapore===c?'border-black':'border-gray-300'}`}>
+                            <button key={c} type="button" onClick={() => setLogoColors((cur) => ({ ...cur, singapore: c }))} className={`flex items-center gap-2 rounded border px-2 py-1 ${logoColors.singapore===c?'border-black':'border-gray-300'}`}>
                               <span className={`inline-block h-4 w-4 rounded ${colorBgClass[c]}`} />
                               <span>{c}</span>
                             </button>

@@ -1,3 +1,5 @@
+import React from 'react'
+
 type RootColor = 'teal' | 'coral' | 'yellow' | 'navy' | 'offwhite'
 
 type Props = {

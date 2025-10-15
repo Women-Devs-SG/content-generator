@@ -49,11 +49,6 @@ html, body, #__next {
   opacity: 0.7
 }
 
-.badge.women-only { background: var(--wdsg-coral); color: white; }
-.badge.allies { background: var(--wdsg-navy); color: white; }
-.badge.childcare { background: var(--wdsg-yellow); color: white; }
-.badge.family { background: var(--wdsg-teal); color: white; }
-
 .badge.open-issues { background: var(--wdsg-navy); color: white; }
 .badge.merged-prs { background: var(--wdsg-teal); color: white; }
 .badge.good-first-issues { background: var(--wdsg-yellow); color: white; }

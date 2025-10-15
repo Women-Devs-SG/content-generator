@@ -1,3 +1,4 @@
+import React from 'react'
 import Logo from '@/components/Logo'
 import ShapeDecor from '@/components/ShapeDecor'
 import RepoCard from '@/components/RepoCard'
@@ -129,7 +130,7 @@ export default function Hacktoberfest({ platform, repos, titleText = '👨‍�
               <div className={`mt-2 ${darkBg ? 'text-white' : 'text-gray-800'} text-base`}>{linkText}</div>
             </div>
           ) : null}
-          <style jsx>{`
+          <style>{`
             :global(.reset-logo-margin .logo) { margin-left: 0 !important; }
           `}</style>
         </div>
