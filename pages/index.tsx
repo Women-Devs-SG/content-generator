@@ -47,7 +47,7 @@ export default function Home() {
   const [facilities, setFacilities] = useState<string[]>(['Private nursing room', 'Parents & kids welcome'])
   const [partnerLogos, setPartnerLogos] = useState<string[]>(['', ''])
   const [ctaText, setCtaText] = useState('Sign up on Meetup')
-  const [eventLinkText, setEventLinkText] = useState('👉meetup.com/women-devs-sg/👈')
+  const [eventLinkText] = useState<string>('👉meetup.com/women-devs-sg/👈')
   const [decorVariant, setDecorVariant] = useState<'playful' | 'tech' | 'games' | 'women'>('playful')
 
   // Logo customization (applies to all templates)
@@ -113,7 +113,7 @@ export default function Home() {
   useEffect(() => {
     const currentBg = template === 'hacktoberfest' ? hackBgColor : eventBgColor
     const options = template === 'hacktoberfest' ? hackLogoOptions : eventLogoOptions
-    setLogoColors((cur) => {
+    setLogoColors((cur: { women: LogoColor; devs: LogoColor; singapore: LogoColor }) => {
       const next = { ...cur }
       if (next.women === currentBg && options.length) next.women = options[0]
       if (next.devs === currentBg && options.length) next.devs = options[0]
@@ -257,30 +257,30 @@ export default function Home() {
                     <div key={idx} className="rounded-lg border p-3">
                       <div className="grid grid-cols-1 gap-2">
                         <input className="w-full rounded border px-2 py-1" placeholder="Name" value={r.name}
-                          onChange={(e) => setRepos((prev) => prev.map((it, i) => i === idx ? { ...it, name: e.target.value } : it))} />
+                          onChange={(e) => setRepos((prev: RepoCard[]) => prev.map((it, i) => i === idx ? { ...it, name: e.target.value } : it))} />
                       </div>
                       <textarea className="mt-2 w-full rounded border px-2 py-1" placeholder="Description" value={r.description || ''}
-                        onChange={(e) => setRepos((prev) => prev.map((it, i) => i === idx ? { ...it, description: e.target.value } : it))} />
+                        onChange={(e) => setRepos((prev: RepoCard[]) => prev.map((it, i) => i === idx ? { ...it, description: e.target.value } : it))} />
                       <div className="mt-2 grid grid-cols-2 gap-2">
                         <input type="number" className="w-full rounded border px-2 py-1" placeholder="Stars" value={r.stars ?? 0}
-                          onChange={(e) => setRepos((prev) => prev.map((it, i) => i === idx ? { ...it, stars: Number(e.target.value) } : it))} />
+                          onChange={(e) => setRepos((prev: RepoCard[]) => prev.map((it, i) => i === idx ? { ...it, stars: Number(e.target.value) } : it))} />
                         <input type="number" className="w-full rounded border px-2 py-1" placeholder="Forks" value={r.forks ?? 0}
-                          onChange={(e) => setRepos((prev) => prev.map((it, i) => i === idx ? { ...it, forks: Number(e.target.value) } : it))} />
+                          onChange={(e) => setRepos((prev: RepoCard[]) => prev.map((it, i) => i === idx ? { ...it, forks: Number(e.target.value) } : it))} />
                       </div>
                       <div className="mt-2 grid grid-cols-3 gap-2">
                         <input type="number" className="w-full rounded border px-2 py-1" placeholder="PRs merged" value={r.prMerged ?? 0}
-                          onChange={(e) => setRepos((prev) => prev.map((it, i) => i === idx ? { ...it, prMerged: Number(e.target.value) } : it))} />
+                          onChange={(e) => setRepos((prev: RepoCard[]) => prev.map((it, i) => i === idx ? { ...it, prMerged: Number(e.target.value) } : it))} />
                         <input type="number" className="w-full rounded border px-2 py-1" placeholder="Open issues" value={r.openIssues ?? 0}
-                          onChange={(e) => setRepos((prev) => prev.map((it, i) => i === idx ? { ...it, openIssues: Number(e.target.value) } : it))} />
+                          onChange={(e) => setRepos((prev: RepoCard[]) => prev.map((it, i) => i === idx ? { ...it, openIssues: Number(e.target.value) } : it))} />
                         <input type="number" className="w-full rounded border px-2 py-1" placeholder="Good first issues" value={r.goodFirstIssues ?? 0}
-                          onChange={(e) => setRepos((prev) => prev.map((it, i) => i === idx ? { ...it, goodFirstIssues: Number(e.target.value) } : it))} />
+                          onChange={(e) => setRepos((prev: RepoCard[]) => prev.map((it, i) => i === idx ? { ...it, goodFirstIssues: Number(e.target.value) } : it))} />
                       </div>
                       <div className="mt-2 flex justify-end">
-                        <Button variant="outline" size="sm" onClick={() => setRepos((prev) => prev.filter((_, i) => i !== idx))}>Remove</Button>
+                        <Button variant="outline" size="sm" onClick={() => setRepos((prev: RepoCard[]) => prev.filter((_, i) => i !== idx))}>Remove</Button>
                       </div>
                     </div>
                   ))}
-                  <Button size="sm" onClick={() => setRepos((prev) => [...prev, { name: 'new-repo', description: '', stars: 0, forks: 0 }])}>Add Repo</Button>
+                  <Button size="sm" onClick={() => setRepos((prev: RepoCard[]) => [...prev, { name: 'new-repo', description: '', stars: 0, forks: 0 }])}>Add Repo</Button>
                 </div>
               </div>
             )}
@@ -408,7 +408,7 @@ export default function Home() {
                     {[1,2,3].map((n) => (
                       <Button key={n} size="sm" variant={speakerCount === n ? 'default' : 'outline'} onClick={() => {
                         setSpeakerCount(n as 1|2|3)
-                        setSpeakers((prev) => {
+                        setSpeakers((prev: Speaker[]) => {
                           const next = [...prev]
                           next.length = n
                           for (let i=0;i<n;i++) if (!next[i]) next[i] = { name: `Speaker ${i+1}`, title: '', imageUrl: '' }
@@ -422,11 +422,11 @@ export default function Home() {
                       <div key={i} className="rounded-lg border p-3">
                         <div className="grid grid-cols-3 gap-2">
                           <input className="rounded border px-2 py-1" placeholder="Image URL" value={speakers[i]?.imageUrl || ''}
-                            onChange={(e) => setSpeakers((prev) => prev.map((s, idx) => idx === i ? { ...s, imageUrl: e.target.value } : s))} />
+                            onChange={(e) => setSpeakers((prev: Speaker[]) => prev.map((s, idx) => idx === i ? { ...s, imageUrl: e.target.value } : s))} />
                           <input className="rounded border px-2 py-1" placeholder="Name" value={speakers[i]?.name || ''}
-                            onChange={(e) => setSpeakers((prev) => prev.map((s, idx) => idx === i ? { ...s, name: e.target.value } : s))} />
+                            onChange={(e) => setSpeakers((prev: Speaker[]) => prev.map((s, idx) => idx === i ? { ...s, name: e.target.value } : s))} />
                           <input className="rounded border px-2 py-1" placeholder="Title" value={speakers[i]?.title || ''}
-                            onChange={(e) => setSpeakers((prev) => prev.map((s, idx) => idx === i ? { ...s, title: e.target.value } : s))} />
+                            onChange={(e) => setSpeakers((prev: Speaker[]) => prev.map((s, idx) => idx === i ? { ...s, title: e.target.value } : s))} />
                         </div>
                       </div>
                     ))}
@@ -448,7 +448,7 @@ export default function Home() {
                   <div className="mt-2 grid grid-cols-1 gap-2 text-sm">
                     {['Private nursing room', 'Parents & kids welcome'].map((f) => (
                       <label key={f} className="flex items-center gap-2">
-                        <input type="checkbox" checked={facilities.includes(f)} onChange={(e) => setFacilities((prev) => e.target.checked ? [...prev, f] : prev.filter((x) => x !== f))} />
+                        <input type="checkbox" checked={facilities.includes(f)} onChange={(e) => setFacilities((prev: string[]) => e.target.checked ? [...prev, f] : prev.filter((x) => x !== f))} />
                         <span>{f}</span>
                       </label>
                     ))}
@@ -460,7 +460,7 @@ export default function Home() {
                   <div className="mt-2 grid grid-cols-2 gap-2">
                     {partnerLogos.map((url, i) => (
                       <input key={i} className="w-full rounded border px-2 py-1" placeholder={`Logo ${i+1} URL`} value={url}
-                        onChange={(e) => setPartnerLogos((prev) => prev.map((u, idx) => idx === i ? e.target.value : u))} />
+                        onChange={(e) => setPartnerLogos((prev: string[]) => prev.map((u, idx) => idx === i ? e.target.value : u))} />
                     ))}
                   </div>
                 </div>

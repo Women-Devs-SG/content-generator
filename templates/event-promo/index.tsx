@@ -20,7 +20,6 @@ type Props = {
   facilities?: string[]
   partnerLogos?: string[]
   ctaText?: string
-  ctaHref?: string
   linkText?: string
   bgColor?: RootColor
   ctaColor?: RootColor
@@ -45,7 +44,6 @@ export default function EventPromo({
   facilities,
   partnerLogos = [],
   ctaText = 'Sign up on Meetup',
-  ctaHref = 'https://www.meetup.com/women-devs-sg/',
   bgColor = 'offwhite',
   ctaColor = 'coral',
   titleColor = 'navy',
@@ -108,7 +106,6 @@ export default function EventPromo({
     if (alliesColor === bgColor && badgeOptions.length) setAlliesColor(badgeOptions[0])
     if (nursingColor === bgColor && badgeOptions.length) setNursingColor(badgeOptions[0])
     if (parentsColor === bgColor && badgeOptions.length) setParentsColor(badgeOptions[0])
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bgColor])
 
   // Sync internal colors when external props (sidebar toggles) change
