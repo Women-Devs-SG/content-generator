@@ -311,7 +311,7 @@ export default function EventPromo({
             {partnerLogos.length > 0 && (
               <div className="flex items-center justify-start gap-3">
                 {partnerLogos.map((src, i) => (
-                  <img key={i} src={src} alt="partner logo" className="h-28 w-auto object-contain" />
+                  <img key={i} src={src} alt="partner logo" className="h-28 w-auto object-contain"/>
                 ))}
               </div>
             )}
