@@ -19,22 +19,18 @@ html, body, #__next {
   flex-direction: column;
   line-height: 0.9;
   font-family: 'Montserrat', sans-serif;
-  color: #FFF;
 }
 .logo .women { 
   font-weight: 700; 
   font-size: 58px; 
-  color: var(--wdsg-navy); 
 }
 .logo .devs { 
   font-weight: 700; 
   font-size: 90px; 
-  color: var(--wdsg-navy); 
 }
 .logo .singapore { 
   font-weight: 400; 
   font-size: 42px; 
-  color: var(--wdsg-navy); 
 }
 
 .badge { 

@@ -5,6 +5,7 @@ import RepoCard from '@/components/RepoCard'
 import { Github } from 'lucide-react'
 import { platformSizes, PlatformKey } from '@/lib/platformSizes'
 import { getTypeScale } from '@/lib/typography'
+import { WDSColor } from '@/lib/colors'
 
 export type RepoCard = {
   name: string
@@ -16,26 +17,24 @@ export type RepoCard = {
   goodFirstIssues?: number
 }
 
-type RootColor = 'teal'|'coral'|'yellow'|'navy'|'offwhite'|'black'
-
 type Props = {
   platform: PlatformKey
   repos: RepoCard[]
   titleText?: string
   subtitleText?: string
-  bgColor?: RootColor
-  ctaColor?: RootColor
-  titleColor?: RootColor
+  bgColor?: WDSColor
+  ctaColor?: WDSColor
+  titleColor?: WDSColor
   linkText?: string
-  logoColors?: { women?: 'teal'|'coral'|'yellow'|'navy'|'offwhite'; devs?: 'teal'|'coral'|'yellow'|'navy'|'offwhite'; singapore?: 'teal'|'coral'|'yellow'|'navy'|'offwhite' }
+  logoColor?: WDSColor
   decorVariant?: 'playful' | 'tech' | 'games' | 'women'
 }
 
-export default function Hacktoberfest({ platform, repos, titleText = 'Hacktoberfest🎉', subtitleText = '📅1–31 October', bgColor = 'yellow', ctaColor = 'coral', titleColor = 'teal', linkText = '👉github.com/orgs/Women-Devs-SG👈', logoColors, decorVariant = 'playful' }: Props) {
+export default function GitHub({ platform, repos, titleText = 'Hacktoberfest🎉', subtitleText = '📅1–31 October', bgColor = 'yellow', ctaColor = 'coral', titleColor = 'teal', linkText = '👉github.com/orgs/Women-Devs-SG👈', logoColor, decorVariant = 'playful' }: Props) {
   const size = platformSizes[platform]
   const type = getTypeScale(platform)
 
-  const bgClass: Record<RootColor, string> = {
+  const bgClass: Record<WDSColor, string> = {
     teal: 'bg-brand-teal',
     coral: 'bg-brand-coral',
     yellow: 'bg-brand-yellow',
@@ -43,7 +42,7 @@ export default function Hacktoberfest({ platform, repos, titleText = 'Hacktoberf
     offwhite: 'bg-brand-offwhite',
     black: 'bg-black',
   }
-  const textClass: Record<RootColor, string> = {
+  const textClass: Record<WDSColor, string> = {
     teal: 'text-brand-teal',
     coral: 'text-brand-coral',
     yellow: 'text-brand-yellow',
@@ -90,7 +89,7 @@ export default function Hacktoberfest({ platform, repos, titleText = 'Hacktoberf
           {/* Header */}
           <div className={`${isStory ? 'flex flex-col items-start gap-4' : `flex ${isLinkedIn ? 'items-center' : 'items-start'} justify-between`}`}>
             <div className={`reset-logo-margin ${isStory ? 'overflow-hidden scale-75 origin-top-left' : isIG ? 'overflow-hidden scale-90 origin-top-left' : ''}`}>
-              <Logo colors={logoColors} />
+              <Logo color={logoColor} />
             </div>
             <div className={`${isStory ? 'text-left w-full' : 'text-right'}`} style={{ fontSize: type.caption }}>
               <div className={`font-semibold ${textClass[titleColor]} ${isStory ? 'w-full' : ''}`} style={{ fontSize: isStory ? '110px' : '70px' }}>{titleText}</div>

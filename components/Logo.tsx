@@ -1,21 +1,17 @@
 import React from 'react'
-
-type RootColor = 'teal' | 'coral' | 'yellow' | 'navy' | 'offwhite'
+import { WDSColor } from '@/lib/colors'
 
 type Props = {
-  colors?: { women?: RootColor; devs?: RootColor; singapore?: RootColor }
+  color?: WDSColor
 }
 
-export default function Logo({ colors = { women: 'navy', devs: 'navy', singapore: 'navy' } }: Props) {
-  const womenColor = `var(--wdsg-${colors.women ?? 'navy'})`
-  const devsColor = `var(--wdsg-${colors.devs ?? 'navy'})`
-  const singaporeColor = `var(--wdsg-${colors.singapore ?? 'navy'})`
+export default function Logo({ color }: Props) {
 
   return (
-    <div className="logo">
-      <div className="women" style={{ color: womenColor }}>WOMEN</div>
-      <div className="devs" style={{ color: devsColor }}>DEVS</div>
-      <div className="singapore" style={{ color: singaporeColor }}>SINGAPORE</div>
+    <div className="logo" style={{ color: color ? `var(--wdsg-${color})` : 'var(--wdsg-navy)' }}>
+      <div className="women">WOMEN</div>
+      <div className="devs">DEVS</div>
+      <div className="singapore">SINGAPORE</div>
     </div>
   )
 }

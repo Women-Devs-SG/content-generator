@@ -4,9 +4,9 @@ import ShapeDecor from '@/components/ShapeDecor'
 import styles from './event-promo.module.css'
 import { platformSizes, PlatformKey } from '@/lib/platformSizes'
 import { getTypeScale } from '@/lib/typography'
+import { WDSColor } from '@/lib/colors'
 
 export type Speaker = { imageUrl?: string; name: string; title?: string }
-type RootColor = 'teal'|'coral'|'yellow'|'navy'|'offwhite'|'black'
 
 type Props = {
   platform: PlatformKey
@@ -21,15 +21,15 @@ type Props = {
   partnerLogos?: string[]
   ctaText?: string
   linkText?: string
-  bgColor?: RootColor
-  ctaColor?: RootColor
-  titleColor?: RootColor
-  logoColors?: { women?: 'teal'|'coral'|'yellow'|'navy'|'offwhite'; devs?: 'teal'|'coral'|'yellow'|'navy'|'offwhite'; singapore?: 'teal'|'coral'|'yellow'|'navy'|'offwhite' },
-  alliesBadgeColor?: RootColor,
-  nursingBadgeColor?: RootColor,
-  parentsBadgeColor?: RootColor,
-  womenBadgeColor?: RootColor,
-  nonCodersBadgeColor?: RootColor,
+  bgColor?: WDSColor
+  ctaColor?: WDSColor
+  titleColor?: WDSColor
+  logoColor?: WDSColor,
+  alliesBadgeColor?: WDSColor,
+  nursingBadgeColor?: WDSColor,
+  parentsBadgeColor?: WDSColor,
+  womenBadgeColor?: WDSColor,
+  nonCodersBadgeColor?: WDSColor,
   decorVariant?: 'playful' | 'tech' | 'games' | 'women',
 }
 
@@ -48,7 +48,7 @@ export default function EventPromo({
   bgColor = 'offwhite',
   ctaColor = 'coral',
   titleColor = 'navy',
-  logoColors,
+  logoColor,
   alliesBadgeColor = 'navy',
   nursingBadgeColor = 'teal',
   parentsBadgeColor = 'yellow',
@@ -64,7 +64,7 @@ export default function EventPromo({
   const isMeetup = platform === 'meetup-banner'
   const isLinkedIn = platform === 'linkedin-cover'
 
-  const bgClass: Record<RootColor, string> = {
+  const bgClass: Record<WDSColor, string> = {
     teal: 'bg-brand-teal',
     coral: 'bg-brand-coral',
     yellow: 'bg-brand-yellow',
@@ -72,7 +72,7 @@ export default function EventPromo({
     offwhite: 'bg-brand-offwhite',
     black: 'bg-black',
   }
-  const textClass: Record<RootColor, string> = {
+  const textClass: Record<WDSColor, string> = {
     teal: 'text-brand-teal',
     coral: 'text-brand-coral',
     yellow: 'text-brand-yellow',
@@ -82,7 +82,7 @@ export default function EventPromo({
   }
 
   // CSS variable mapping for inline styles to override .badge defaults in globals.css
-  const colorVar: Record<RootColor, string> = {
+  const colorVar: Record<WDSColor, string> = {
     teal: 'var(--wdsg-teal)',
     coral: 'var(--wdsg-coral)',
     yellow: 'var(--wdsg-yellow)',
@@ -90,16 +90,16 @@ export default function EventPromo({
     offwhite: 'var(--wdsg-offwhite)',
     black: '#000000',
   }
-  const textOnBg = (c: RootColor) => (c === 'offwhite' || c === 'yellow' ? '#212121' : '#FFFFFF')
+  const textOnBg = (c: WDSColor) => (c === 'offwhite' || c === 'yellow' ? '#212121' : '#FFFFFF')
 
   const darkBg = bgColor === 'teal' || bgColor === 'navy' || bgColor === 'coral'
-  const palette: RootColor[] = ['teal','coral','yellow','navy','offwhite']
+  const palette: WDSColor[] = ['teal','coral','yellow','navy','offwhite']
   const badgeOptions = palette.filter((c) => c !== bgColor)
-  const [alliesColor, setAlliesColor] = useState<RootColor>(alliesBadgeColor)
-  const [nursingColor, setNursingColor] = useState<RootColor>(nursingBadgeColor)
-  const [parentsColor, setParentsColor] = useState<RootColor>(parentsBadgeColor)
-  const [nonCodersColor, setNonCodersColor] = useState<RootColor>(nonCodersBadgeColor)
-  const cycle = (current: RootColor): RootColor => {
+  const [alliesColor, setAlliesColor] = useState<WDSColor>(alliesBadgeColor)
+  const [nursingColor, setNursingColor] = useState<WDSColor>(nursingBadgeColor)
+  const [parentsColor, setParentsColor] = useState<WDSColor>(parentsBadgeColor)
+  const [nonCodersColor, setNonCodersColor] = useState<WDSColor>(nonCodersBadgeColor)
+  const cycle = (current: WDSColor): WDSColor => {
     const idx = badgeOptions.indexOf(current)
     return badgeOptions[(idx + 1) % badgeOptions.length] || current
   }
@@ -182,7 +182,7 @@ export default function EventPromo({
           <div className="mt-4 flex items-start gap-4">
             <h1 className={`font-bold ${textClass[titleColor]} flex-1 min-w-0`} style={{ fontSize: type.headline, lineHeight: '1' }}>{eventName}</h1>
             <div className={`reset-logo-margin ${isStory ? 'overflow-hidden scale-75 origin-top-left' : isIG ? 'overflow-hidden scale-90 origin-top-right' : ''}`}>
-              <Logo colors={logoColors} />
+              <Logo color={logoColor} />
             </div>
           </div>
           {eventSubtitle && (
@@ -217,8 +217,8 @@ export default function EventPromo({
               </div>
             </div>
             <div className={`${isStory ? 'w-full items-center text-left mt-10 mb-10' : 'w-[min(40%)] items-end text-right'} flex flex-col gap-3`}>
-              <div className={`${darkBg ? 'text-white' : 'text-gray-800'}`} style={{ fontSize: type.body }}>
-                <div className="font-semibold">📅{eventDateTime}</div>
+              <div className={`${darkBg ? 'text-white' : 'text-gray-800'}`} style={{ fontSize: 30 }}>
+                <div className="font-semibold">📅 {eventDateTime}</div>
                 <div className={`${darkBg ? 'text-white' : 'text-gray-800'}`}>📍{eventVenue}</div>
               </div>
               <div className={`flex flex-wrap ${isStory ? 'justify-center' : 'justify-end'} items-center gap-2 pointer-events-auto`}>
@@ -291,14 +291,21 @@ export default function EventPromo({
           </div>
 
           {/* CTA below the speaker cards */}
-          <div className="mt-6 flex flex-col items-center">
-            <div className={`rounded-full ${bgClass[ctaColor]} ${isStory ? 'text4xl' : 'text2xl' } ${ctaColor==='offwhite' ? 'text-gray-800' : 'text-white'} ${isStory ? 'gap-3 px-20 py-5' : 'px-10 py-5'} font-semibold inline-flex items-center justify-center text-center`} style={{ fontSize: isStory ? type.body : undefined }}>
-              {ctaText}
-            </div>
-            {linkText && (
-              <div className={`${isStory ? 'mt-10' : 'mt-2'} ${darkBg ? 'text-white' : 'text-gray-800'} text-3xl text-center`} style={{ fontSize: isStory ? type.body : undefined }}>{linkText}</div>
-            )}
-          </div>
+          {
+            !isMeetup 
+            ? (
+              <div className="mt-6 flex flex-col items-center">
+                <div className={`rounded-full ${bgClass[ctaColor]} ${isStory ? 'text4xl' : 'text3xl' } ${ctaColor==='offwhite' ? 'text-gray-800' : 'text-white'} ${isStory ? 'gap-3 px-20 py-5' : 'px-10 py-5'} font-semibold inline-flex items-center justify-center text-center`} style={{ fontSize: isStory ? type.body : undefined }}>
+                  {ctaText}
+                </div>
+                {linkText && (
+                  <div className={`${isStory ? 'mt-10' : 'mt-2'} ${darkBg ? 'text-white' : 'text-gray-800'} text-2xl text-center`} style={{ fontSize: isStory ? type.body : undefined }}>{linkText}</div>
+                )}
+              </div>
+            ) 
+            :
+            <></>
+          }
 
           <div className="mt-auto flex items-end justify-start absolute bottom-4 right-0 pointer-events-none">
             {partnerLogos.length > 0 && (
