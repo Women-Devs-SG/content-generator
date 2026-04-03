@@ -179,18 +179,29 @@ export default function EventPromo({
         )}
         
         <div className={`absolute inset-0 z-20 ${isLinkedIn ? 'p-1' : 'p-6'} flex flex-col pointer-events-auto ${isStory ? 'justify-center' : ''}`}>
-          <div className="mt-4 flex items-start gap-4">
+          <div className="mt-2 flex items-start gap-2">
             <h1 className={`font-bold ${textClass[titleColor]} flex-1 min-w-0`} style={{ fontSize: type.headline, lineHeight: '1' }}>{eventName}</h1>
-            <div className={`reset-logo-margin ${isStory ? 'overflow-hidden scale-75 origin-top-left' : isIG ? 'overflow-hidden scale-90 origin-top-right' : ''}`}>
-              <Logo color={logoColor} />
+            <div className="flex flex-col items-end">
+              <div className={`reset-logo-margin overflow-hidden ${isStory ? 'scale-75' : isIG ? 'scale-95' : isMeetup ? 'scale-75' : ''}`}>
+                <Logo color={logoColor} />
+              </div>
+              <div className="mt-auto flex items-end justify-start pointer-events-none justify-center">
+                {partnerLogos.length > 0 && (
+                <div className="flex items-center justify-start gap-2">
+                    {partnerLogos.map((src, i) => (
+                      <img key={i} src={src} alt="partner logo" className="h-10 w-auto object-contain" />
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
           {eventSubtitle && (
             <p className={`${isLinkedIn ? 'mt-1' : 'mt-1'} ${darkBg ? 'text-white' : 'text-gray-800'}`} style={{ fontSize: type.body }}>{eventSubtitle}</p>
           )}
-          {eventDescription && <p className={`mt-2 max-w-prose ${darkBg ? 'text-white' : 'text-gray-800'}`} style={{ fontSize: type.caption }}>{eventDescription}</p>}
+          {eventDescription && <p className={`mt-1 ${darkBg ? 'text-white' : 'text-gray-800'}`} style={{ fontSize: type.caption }}>{eventDescription}</p>}
 
-          <div className={`mt-4 flex ${isStory ? 'flex-col gap-4' : 'gap-4'}`}>
+          <div className={`mt-1 flex ${isStory ? 'flex-col gap-4' : 'gap-4'}`}>
             <div className={`${isStory ? 'w-full' : 'flex-1'} min-w-0 flex`}>
               <div className="flex-1 flex flex-col justify-center">
                 <div className={`grid grid-cols-1 gap-3`}>
@@ -216,7 +227,7 @@ export default function EventPromo({
                 </div>
               </div>
             </div>
-            <div className={`${isStory ? 'w-full items-center text-left mt-10 mb-10' : 'w-[min(40%)] items-end text-right'} flex flex-col gap-3`}>
+            <div className={`${isStory ? 'w-full items-center text-left mt-1 mb-10' : 'w-[min(40%)] items-end text-right'} flex flex-col gap-3`}>
               <div className={`${darkBg ? 'text-white' : 'text-gray-800'}`} style={{ fontSize: 30 }}>
                 <div className="font-semibold">📅 {eventDateTime}</div>
                 <div className={`${darkBg ? 'text-white' : 'text-gray-800'}`}>📍{eventVenue}</div>
@@ -224,7 +235,7 @@ export default function EventPromo({
               <div className={`flex flex-wrap ${isStory ? 'justify-center' : 'justify-end'} items-center gap-2 pointer-events-auto`}>
                 {audienceType === 'Women only' && (
                   <span
-                    className={`inline-block px-[10px] py-[4px] m-[2px] rounded-full text-[25px] select-none`}
+                    className={`badge select-none`}
                     style={{ backgroundColor: colorVar[womenBadgeColor], color: textOnBg(womenBadgeColor), opacity: 1 }}
                   >
                     Women Only 👩‍💻
@@ -238,7 +249,7 @@ export default function EventPromo({
                       console.log('Allies badge click', { current: alliesColor, next })
                       setAlliesColor(next)
                     }}
-                    className={`inline-block px-[10px] py-[4px] m-[2px] rounded-full text-[25px] cursor-pointer pointer-events-auto`}
+                    className={`badge cursor-pointer pointer-events-auto`}
                     style={{ backgroundColor: colorVar[alliesColor], color: textOnBg(alliesColor), opacity: 1 }}
                   >
                     Allies: Bring a 👩 Friend
@@ -252,7 +263,7 @@ export default function EventPromo({
                       console.log('Non-coders badge click', { current: nonCodersColor, next })
                       setNonCodersColor(next)
                     }}
-                    className={`inline-block px-[10px] py-[4px] m-[2px] rounded-full text-[25px] cursor-pointer pointer-events-auto`}
+                    className={`badge cursor-pointer pointer-events-auto`}
                     style={{ backgroundColor: colorVar[nonCodersColor], color: textOnBg(nonCodersColor), opacity: 1 }}
                   >
                     Non-coders Welcome 🙌
@@ -266,7 +277,7 @@ export default function EventPromo({
                       console.log('Nursing badge click', { current: nursingColor, next })
                       setNursingColor(next)
                     }}
-                    className={`inline-block px-[10px] py-[4px] m-[2px] rounded-full text-[25px] cursor-pointer pointer-events-auto`}
+                    className={`badge cursor-pointer pointer-events-auto`}
                     style={{ backgroundColor: colorVar[nursingColor], color: textOnBg(nursingColor), opacity: 1 }}
                   >
                     Nursing Room Available 🍼
@@ -280,7 +291,7 @@ export default function EventPromo({
                       console.log('Parents badge click', { current: parentsColor, next })
                       setParentsColor(next)
                     }}
-                    className={`inline-block px-[10px] py-[4px] m-[2px] rounded-full text-[25px] cursor-pointer pointer-events-auto`}
+                    className={`badge cursor-pointer pointer-events-auto`}
                     style={{ backgroundColor: colorVar[parentsColor], color: textOnBg(parentsColor), opacity: 1 }}
                   >
                     Parents & Kids Welcome 👨‍👩‍👧‍👦
@@ -306,16 +317,6 @@ export default function EventPromo({
             :
             <></>
           }
-
-          <div className="mt-auto flex items-end justify-start absolute bottom-4 right-0 pointer-events-none">
-            {partnerLogos.length > 0 && (
-              <div className="flex items-center justify-start gap-3">
-                {partnerLogos.map((src, i) => (
-                  <img key={i} src={src} alt="partner logo" className="h-28 w-auto object-contain"/>
-                ))}
-              </div>
-            )}
-          </div>
         </div>
       </div>
     </div>
