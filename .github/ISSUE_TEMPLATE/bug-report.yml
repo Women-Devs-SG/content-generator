@@ -1,0 +1,90 @@
+name: 🐛 Bug report
+description: Report a bug, unexpected behavior or problem in the content generator.
+title: '[Bug]: '
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting a problem!
+
+        **If you would like to work on this issue:** Please ask to be assigned and wait for a maintainer to formally assign it before beginning. Commenting on an issue does not count as assignment. Issues labeled `women-devs-only` are reserved for women developers.
+
+        Read the full [contribution guidelines](https://github.com/Women-Devs-SG/content-generator/blob/main/CONTRIBUTING.md).
+
+        ***
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Clearly describe the problem you observed.
+      placeholder: Tell us what went wrong.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect to happen?
+      description: Describe the behavior you expected instead.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: template
+    attributes:
+      label: Template
+      options:
+        - Event Promotion
+        - Contribute to Our GitHub (Hacktoberfest)
+        - Not template-specific
+    validations:
+      required: true
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform size
+      multiple: true
+      options:
+        - Instagram Post (1080×1080)
+        - Instagram Story (1080×1920)
+        - Meetup Banner (1200×675)
+        - LinkedIn Cover (1128×191)
+        - Not platform-specific
+
+  - type: dropdown
+    id: stage
+    attributes:
+      label: Where does the problem appear?
+      options:
+        - In the preview
+        - In the exported image
+        - Both
+        - In the editor form
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction steps
+      placeholder: |
+        1. Select the ... template and ... platform
+        2. Enter ...
+        3. Click Export and observe...
+    validations:
+      required: true
+
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and OS
+      placeholder: 'Example: Chrome 140 on macOS'
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Screenshots and additional context
+      description: Add screenshots or exported images and anything else that may help.

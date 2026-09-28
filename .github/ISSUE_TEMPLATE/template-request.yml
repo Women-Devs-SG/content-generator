@@ -1,0 +1,57 @@
+name: 🎨 Template request
+description: Propose a new visual template or a new platform size.
+title: '[Template]: '
+labels: [template]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping us create more on-brand content for the community!
+
+        Design ideas and mockups are welcome from everyone, with or without code. If you would like to build the template, please wait for a maintainer to agree on the design and assign the issue to you. See our [contribution guidelines](https://github.com/Women-Devs-SG/content-generator/blob/main/CONTRIBUTING.md).
+
+        ***
+
+  - type: textarea
+    id: purpose
+    attributes:
+      label: What is this template for?
+      description: What kind of post or announcement would it be used for?
+      placeholder: 'Example: announcing volunteer call-outs for upcoming events.'
+    validations:
+      required: true
+
+  - type: dropdown
+    id: platforms
+    attributes:
+      label: Platform sizes
+      description: Which sizes should it support?
+      multiple: true
+      options:
+        - Instagram Post (1080×1080)
+        - Instagram Story (1080×1920)
+        - Meetup Banner (1200×675)
+        - LinkedIn Cover (1128×191)
+        - A new platform size (describe below)
+    validations:
+      required: true
+
+  - type: textarea
+    id: fields
+    attributes:
+      label: Editable content
+      description: Which text, images, or options should people be able to change?
+      placeholder: |
+        - Title
+        - Date and venue
+        - Speaker photos
+    validations:
+      required: true
+
+  - type: textarea
+    id: design
+    attributes:
+      label: Design mockup or references
+      description: Attach a sketch, Figma link, or example posts you like.
