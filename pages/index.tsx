@@ -11,45 +11,76 @@ import { WDSColor } from '@/lib/colors'
 
 const templates = [
   { key: 'event-promo', label: 'Event Promotion' },
-  { key: 'github', label: 'Contribute to Our GitHub' },
+  { key: 'github', label: 'Contribute to Our GitHub' }
 ] as const
 
-const platforms: { key: PlatformKey; label: string }[] = Object.entries(platformSizes).map(([k, v]) => ({ key: k as PlatformKey, label: v.label }))
+const platforms: { key: PlatformKey; label: string }[] = Object.entries(
+  platformSizes
+).map(([k, v]) => ({ key: k as PlatformKey, label: v.label }))
 
-type TemplateKey = typeof templates[number]['key']
+type TemplateKey = (typeof templates)[number]['key']
 
 export default function Home() {
   const [platform, setPlatform] = useState<PlatformKey>('instagram-post')
-    const [template, setTemplate] = useState<TemplateKey>('event-promo')
+  const [template, setTemplate] = useState<TemplateKey>('event-promo')
 
   // Event promotion state
   const [eventName, setEventName] = useState('AI Workshop')
   const [eventSubtitle, setEventSubtitle] = useState('What are LLMs?')
-  const [eventDescription, setEventDescription] = useState('Join us for a panel and networking session on building inclusive tech communities.')
+  const [eventDescription, setEventDescription] = useState(
+    'Join us for a panel and networking session on building inclusive tech communities.'
+  )
   const [eventDateTime, setEventDateTime] = useState('Thu, 24 Oct · 7:00 PM')
   const [eventVenue, setEventVenue] = useState('Somewhere, Singapore')
   const [speakerCount, setSpeakerCount] = useState<1 | 2 | 3>(1)
   const [speakers, setSpeakers] = useState<Speaker[]>([
     { name: 'Aisha Lee', title: 'Senior Engineer, ACME', imageUrl: '' },
     { name: 'Mei Chen', title: 'Developer Advocate, Foo', imageUrl: '' },
-    { name: 'Anita S.', title: 'Product Engineer, Bar', imageUrl: '' },
+    { name: 'Anita S.', title: 'Product Engineer, Bar', imageUrl: '' }
   ])
-  const [audienceType, setAudienceType] = useState<'Women only' | 'Allies welcome' | ''>('Allies welcome')
-  const [facilities, setFacilities] = useState<string[]>(['Private nursing room', 'Parents & kids welcome'])
+  const [audienceType, setAudienceType] = useState<
+    'Women only' | 'Allies welcome' | ''
+  >('Allies welcome')
+  const [facilities, setFacilities] = useState<string[]>([
+    'Private nursing room',
+    'Parents & kids welcome'
+  ])
   const [partnerLogos, setPartnerLogos] = useState<string[]>(['', ''])
   const [ctaText, setCtaText] = useState('Sign up on Meetup')
-  const [eventLinkText, setEventLinkText] = useState<string>('👉meetup.com/women-devs-sg/👈')
-  const [decorVariant, setDecorVariant] = useState<'playful' | 'tech' | 'games' | 'women'>('playful')
+  const [eventLinkText, setEventLinkText] = useState<string>(
+    '👉meetup.com/women-devs-sg/👈'
+  )
+  const [decorVariant, setDecorVariant] = useState<
+    'playful' | 'tech' | 'games' | 'women'
+  >('playful')
 
   // GitHub state
   const [repos, setRepos] = useState<RepoCard[]>([
-    { name: '🤖volunteer-telegram-bot', description: 'Telegram bot for volunteer management for Women Devs SG', stars: 12, forks: 13 },
-    { name: '🍼bibsnbub', description: 'An app to help parents find childcare facilities in Singapore!', stars: 11, forks: 14 },
-    { name: '👩‍💻womendevssg', description: 'Website for womendevssg', stars: 14, forks: 18 },
+    {
+      name: '🤖volunteer-telegram-bot',
+      description: 'Telegram bot for volunteer management for Women Devs SG',
+      stars: 12,
+      forks: 13
+    },
+    {
+      name: '🍼bibsnbub',
+      description:
+        'An app to help parents find childcare facilities in Singapore!',
+      stars: 11,
+      forks: 14
+    },
+    {
+      name: '👩‍💻womendevssg',
+      description: 'Website for womendevssg',
+      stars: 14,
+      forks: 18
+    }
   ])
   const [hackTitleText, setHackTitleText] = useState('Hacktoberfest🎉')
   const [hackSubtitleText, setHackSubtitleText] = useState('📅1–31 October')
-  const [hackLinkText, setHackLinkText] = useState('👉github.com/orgs/Women-Devs-SG👈')
+  const [hackLinkText, setHackLinkText] = useState(
+    '👉github.com/orgs/Women-Devs-SG👈'
+  )
 
   // Logo customization (applies to all templates)
   const colorBgClass: Record<WDSColor, string> = {
@@ -58,7 +89,7 @@ export default function Home() {
     yellow: 'bg-brand-yellow',
     navy: 'bg-brand-navy',
     offwhite: 'bg-brand-offwhite',
-    black: 'bg-black',
+    black: 'bg-black'
   }
   const [logoColor, setLogoColor] = useState<WDSColor>('navy')
 
@@ -72,12 +103,15 @@ export default function Home() {
   const [alliesBadgeColor, setAlliesBadgeColor] = useState<WDSColor>('navy')
   const [nursingBadgeColor, setNursingBadgeColor] = useState<WDSColor>('navy')
   const [parentsBadgeColor, setParentsBadgeColor] = useState<WDSColor>('navy')
-  const [nonCodersBadgeColor, setNonCodersBadgeColor] = useState<WDSColor>('navy')
+  const [nonCodersBadgeColor, setNonCodersBadgeColor] =
+    useState<WDSColor>('navy')
 
   const fileBase = `${template}-${platform}`
-  const palette: WDSColor[] = ['teal','coral','yellow','navy','offwhite']
+  const palette: WDSColor[] = ['teal', 'coral', 'yellow', 'navy', 'offwhite']
   const hackOtherOptions: WDSColor[] = palette.filter((c) => c !== hackBgColor)
-  const eventOtherOptions: WDSColor[] = palette.filter((c) => c !== eventBgColor)
+  const eventOtherOptions: WDSColor[] = palette.filter(
+    (c) => c !== eventBgColor
+  )
   const hackLogoOptions: WDSColor[] = palette.filter((c) => c !== hackBgColor)
   const eventLogoOptions: WDSColor[] = palette.filter((c) => c !== eventBgColor)
 
@@ -113,7 +147,7 @@ export default function Home() {
   useEffect(() => {
     const currentBg = template === 'github' ? hackBgColor : eventBgColor
     const options = template === 'github' ? hackLogoOptions : eventLogoOptions
-    setLogoColor( (cur: WDSColor) => {
+    setLogoColor((cur: WDSColor) => {
       let next = cur
       if (next === currentBg && options.length) next = options[0]
       return next
@@ -128,14 +162,20 @@ export default function Home() {
 
       <main className="container py-8">
         <h1 className="text-3xl font-bold">Women Devs SG Content Generator</h1>
-        <p className="mt-1 text-gray-700">Create on-brand visuals for social and community platforms.</p>
+        <p className="mt-1 text-gray-700">
+          Create on-brand visuals for social and community platforms.
+        </p>
 
         <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-3">
           <div className="rounded-xl border bg-white p-4">
             <div className="font-semibold">Template</div>
             <div className="mt-2 flex flex-col gap-2">
               {templates.map((t) => (
-                <Button key={t.key} variant={template === t.key ? 'default' : 'outline'} onClick={() => setTemplate(t.key)}>
+                <Button
+                  key={t.key}
+                  variant={template === t.key ? 'default' : 'outline'}
+                  onClick={() => setTemplate(t.key)}
+                >
                   {t.label}
                 </Button>
               ))}
@@ -144,7 +184,11 @@ export default function Home() {
             <div className="mt-4 font-semibold">Platform</div>
             <div className="mt-2 grid grid-cols-1 gap-2">
               {platforms.map((p) => (
-                <Button key={p.key} variant={platform === p.key ? 'default' : 'outline'} onClick={() => setPlatform(p.key)}>
+                <Button
+                  key={p.key}
+                  variant={platform === p.key ? 'default' : 'outline'}
+                  onClick={() => setPlatform(p.key)}
+                >
                   {p.label}
                 </Button>
               ))}
@@ -152,13 +196,19 @@ export default function Home() {
 
             <div className="mt-4 font-semibold">Background Decor</div>
             <div className="mt-2 flex flex-wrap gap-2">
-              {([
-                { key: 'playful', label: 'Shapes' },
-                { key: 'tech', label: 'Tech Emojis' },
-                { key: 'games', label: 'Game Emojis' },
-                { key: 'women', label: 'Women Emojis' },
-              ] as const).map((opt) => (
-                <Button key={opt.key} variant={decorVariant === opt.key ? 'default' : 'outline'} onClick={() => setDecorVariant(opt.key)}>
+              {(
+                [
+                  { key: 'playful', label: 'Shapes' },
+                  { key: 'tech', label: 'Tech Emojis' },
+                  { key: 'games', label: 'Game Emojis' },
+                  { key: 'women', label: 'Women Emojis' }
+                ] as const
+              ).map((opt) => (
+                <Button
+                  key={opt.key}
+                  variant={decorVariant === opt.key ? 'default' : 'outline'}
+                  onClick={() => setDecorVariant(opt.key)}
+                >
                   {opt.label}
                 </Button>
               ))}
@@ -167,22 +217,46 @@ export default function Home() {
             {template === 'github' && (
               <div className="mt-6">
                 <div className="font-semibold">GitHub</div>
-                <input className="mt-2 w-full rounded border px-2 py-1" placeholder="Our GitHub"
+                <input
+                  className="mt-2 w-full rounded border px-2 py-1"
+                  placeholder="Our GitHub"
                   value={hackTitleText}
-                  onChange={(e) => setHackTitleText(e.target.value)} />
-                <input className="mt-2 w-full rounded border px-2 py-1" placeholder="📅1–31 October"
+                  onChange={(e) => setHackTitleText(e.target.value)}
+                />
+                <input
+                  className="mt-2 w-full rounded border px-2 py-1"
+                  placeholder="📅1–31 October"
                   value={hackSubtitleText}
-                  onChange={(e) => setHackSubtitleText(e.target.value)} />
-                <input className="mt-2 w-full rounded border px-2 py-1" placeholder="👉github.com/orgs/Women-Devs-SG👈"
+                  onChange={(e) => setHackSubtitleText(e.target.value)}
+                />
+                <input
+                  className="mt-2 w-full rounded border px-2 py-1"
+                  placeholder="👉github.com/orgs/Women-Devs-SG👈"
                   value={hackLinkText}
-                  onChange={(e) => setHackLinkText(e.target.value)} />
+                  onChange={(e) => setHackLinkText(e.target.value)}
+                />
                 <div className="mt-3 grid grid-cols-1 gap-3 text-sm">
                   <div>
                     <div className="font-semibold">Background</div>
                     <div className="mt-1 flex flex-wrap gap-2">
-                      {(['teal','coral','yellow','navy','offwhite'] as WDSColor[]).map((c) => (
-                        <button key={c} type="button" onClick={() => setHackBgColor(c)} className={`flex items-center gap-2 rounded border px-2 py-1 ${hackBgColor===c?'border-black':'border-gray-300'}`}>
-                          <span className={`inline-block h-4 w-4 rounded ${colorBgClass[c]}`} />
+                      {(
+                        [
+                          'teal',
+                          'coral',
+                          'yellow',
+                          'navy',
+                          'offwhite'
+                        ] as WDSColor[]
+                      ).map((c) => (
+                        <button
+                          key={c}
+                          type="button"
+                          onClick={() => setHackBgColor(c)}
+                          className={`flex items-center gap-2 rounded border px-2 py-1 ${hackBgColor === c ? 'border-black' : 'border-gray-300'}`}
+                        >
+                          <span
+                            className={`inline-block h-4 w-4 rounded ${colorBgClass[c]}`}
+                          />
                           <span>{c}</span>
                         </button>
                       ))}
@@ -192,8 +266,15 @@ export default function Home() {
                     <div className="font-semibold">CTA</div>
                     <div className="mt-1 flex flex-wrap gap-2">
                       {hackOtherOptions.map((c) => (
-                        <button key={c} type="button" onClick={() => setHackCtaColor(c)} className={`flex items-center gap-2 rounded border px-2 py-1 ${hackCtaColor===c?'border-black':'border-gray-300'}`}>
-                          <span className={`inline-block h-4 w-4 rounded ${colorBgClass[c]}`} />
+                        <button
+                          key={c}
+                          type="button"
+                          onClick={() => setHackCtaColor(c)}
+                          className={`flex items-center gap-2 rounded border px-2 py-1 ${hackCtaColor === c ? 'border-black' : 'border-gray-300'}`}
+                        >
+                          <span
+                            className={`inline-block h-4 w-4 rounded ${colorBgClass[c]}`}
+                          />
                           <span>{c}</span>
                         </button>
                       ))}
@@ -203,19 +284,33 @@ export default function Home() {
                     <div className="font-semibold">Title</div>
                     <div className="mt-1 flex flex-wrap gap-2">
                       {hackOtherOptions.map((c) => (
-                        <button key={c} type="button" onClick={() => setHackTitleColor(c)} className={`flex items-center gap-2 rounded border px-2 py-1 ${hackTitleColor===c?'border-black':'border-gray-300'}`}>
-                          <span className={`inline-block h-4 w-4 rounded ${colorBgClass[c]}`} />
+                        <button
+                          key={c}
+                          type="button"
+                          onClick={() => setHackTitleColor(c)}
+                          className={`flex items-center gap-2 rounded border px-2 py-1 ${hackTitleColor === c ? 'border-black' : 'border-gray-300'}`}
+                        >
+                          <span
+                            className={`inline-block h-4 w-4 rounded ${colorBgClass[c]}`}
+                          />
                           <span>{c}</span>
                         </button>
                       ))}
                     </div>
                   </div>
-                   <div>
+                  <div>
                     <div className="font-semibold">WDS Logo</div>
                     <div className="mt-1 flex flex-wrap gap-2">
                       {hackOtherOptions.map((c) => (
-                        <button key={c} type="button" onClick={() => setLogoColor(c)} className={`flex items-center gap-2 rounded border px-2 py-1 ${logoColor===c?'border-black':'border-gray-300'}`}>
-                          <span className={`inline-block h-4 w-4 rounded ${colorBgClass[c]}`} />
+                        <button
+                          key={c}
+                          type="button"
+                          onClick={() => setLogoColor(c)}
+                          className={`flex items-center gap-2 rounded border px-2 py-1 ${logoColor === c ? 'border-black' : 'border-gray-300'}`}
+                        >
+                          <span
+                            className={`inline-block h-4 w-4 rounded ${colorBgClass[c]}`}
+                          />
                           <span>{c}</span>
                         </button>
                       ))}
@@ -227,31 +322,149 @@ export default function Home() {
                   {repos.map((r, idx) => (
                     <div key={idx} className="rounded-lg border p-3">
                       <div className="grid grid-cols-1 gap-2">
-                        <input className="w-full rounded border px-2 py-1" placeholder="Name" value={r.name}
-                          onChange={(e) => setRepos((prev: RepoCard[]) => prev.map((it, i) => i === idx ? { ...it, name: e.target.value } : it))} />
+                        <input
+                          className="w-full rounded border px-2 py-1"
+                          placeholder="Name"
+                          value={r.name}
+                          onChange={(e) =>
+                            setRepos((prev: RepoCard[]) =>
+                              prev.map((it, i) =>
+                                i === idx ? { ...it, name: e.target.value } : it
+                              )
+                            )
+                          }
+                        />
                       </div>
-                      <textarea className="mt-2 w-full rounded border px-2 py-1" placeholder="Description" value={r.description || ''}
-                        onChange={(e) => setRepos((prev: RepoCard[]) => prev.map((it, i) => i === idx ? { ...it, description: e.target.value } : it))} />
+                      <textarea
+                        className="mt-2 w-full rounded border px-2 py-1"
+                        placeholder="Description"
+                        value={r.description || ''}
+                        onChange={(e) =>
+                          setRepos((prev: RepoCard[]) =>
+                            prev.map((it, i) =>
+                              i === idx
+                                ? { ...it, description: e.target.value }
+                                : it
+                            )
+                          )
+                        }
+                      />
                       <div className="mt-2 grid grid-cols-2 gap-2">
-                        <input type="number" className="w-full rounded border px-2 py-1" placeholder="Stars" value={r.stars ?? 0}
-                          onChange={(e) => setRepos((prev: RepoCard[]) => prev.map((it, i) => i === idx ? { ...it, stars: Number(e.target.value) } : it))} />
-                        <input type="number" className="w-full rounded border px-2 py-1" placeholder="Forks" value={r.forks ?? 0}
-                          onChange={(e) => setRepos((prev: RepoCard[]) => prev.map((it, i) => i === idx ? { ...it, forks: Number(e.target.value) } : it))} />
+                        <input
+                          type="number"
+                          className="w-full rounded border px-2 py-1"
+                          placeholder="Stars"
+                          value={r.stars ?? 0}
+                          onChange={(e) =>
+                            setRepos((prev: RepoCard[]) =>
+                              prev.map((it, i) =>
+                                i === idx
+                                  ? { ...it, stars: Number(e.target.value) }
+                                  : it
+                              )
+                            )
+                          }
+                        />
+                        <input
+                          type="number"
+                          className="w-full rounded border px-2 py-1"
+                          placeholder="Forks"
+                          value={r.forks ?? 0}
+                          onChange={(e) =>
+                            setRepos((prev: RepoCard[]) =>
+                              prev.map((it, i) =>
+                                i === idx
+                                  ? { ...it, forks: Number(e.target.value) }
+                                  : it
+                              )
+                            )
+                          }
+                        />
                       </div>
                       <div className="mt-2 grid grid-cols-3 gap-2">
-                        <input type="number" className="w-full rounded border px-2 py-1" placeholder="PRs merged" value={r.prMerged ?? 0}
-                          onChange={(e) => setRepos((prev: RepoCard[]) => prev.map((it, i) => i === idx ? { ...it, prMerged: Number(e.target.value) } : it))} />
-                        <input type="number" className="w-full rounded border px-2 py-1" placeholder="Open issues" value={r.openIssues ?? 0}
-                          onChange={(e) => setRepos((prev: RepoCard[]) => prev.map((it, i) => i === idx ? { ...it, openIssues: Number(e.target.value) } : it))} />
-                        <input type="number" className="w-full rounded border px-2 py-1" placeholder="Good first issues" value={r.goodFirstIssues ?? 0}
-                          onChange={(e) => setRepos((prev: RepoCard[]) => prev.map((it, i) => i === idx ? { ...it, goodFirstIssues: Number(e.target.value) } : it))} />
+                        <input
+                          type="number"
+                          className="w-full rounded border px-2 py-1"
+                          placeholder="PRs merged"
+                          value={r.prMerged ?? 0}
+                          onChange={(e) =>
+                            setRepos((prev: RepoCard[]) =>
+                              prev.map((it, i) =>
+                                i === idx
+                                  ? { ...it, prMerged: Number(e.target.value) }
+                                  : it
+                              )
+                            )
+                          }
+                        />
+                        <input
+                          type="number"
+                          className="w-full rounded border px-2 py-1"
+                          placeholder="Open issues"
+                          value={r.openIssues ?? 0}
+                          onChange={(e) =>
+                            setRepos((prev: RepoCard[]) =>
+                              prev.map((it, i) =>
+                                i === idx
+                                  ? {
+                                      ...it,
+                                      openIssues: Number(e.target.value)
+                                    }
+                                  : it
+                              )
+                            )
+                          }
+                        />
+                        <input
+                          type="number"
+                          className="w-full rounded border px-2 py-1"
+                          placeholder="Good first issues"
+                          value={r.goodFirstIssues ?? 0}
+                          onChange={(e) =>
+                            setRepos((prev: RepoCard[]) =>
+                              prev.map((it, i) =>
+                                i === idx
+                                  ? {
+                                      ...it,
+                                      goodFirstIssues: Number(e.target.value)
+                                    }
+                                  : it
+                              )
+                            )
+                          }
+                        />
                       </div>
                       <div className="mt-2 flex justify-end">
-                        <Button variant="outline" size="sm" onClick={() => setRepos((prev: RepoCard[]) => prev.filter((_, i) => i !== idx))}>Remove</Button>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() =>
+                            setRepos((prev: RepoCard[]) =>
+                              prev.filter((_, i) => i !== idx)
+                            )
+                          }
+                        >
+                          Remove
+                        </Button>
                       </div>
                     </div>
                   ))}
-                  <Button size="sm" onClick={() => setRepos((prev: RepoCard[]) => [...prev, { name: 'new-repo', description: '', stars: 0, forks: 0 }])}>Add Repo</Button>
+                  <Button
+                    size="sm"
+                    onClick={() =>
+                      setRepos((prev: RepoCard[]) => [
+                        ...prev,
+                        {
+                          name: 'new-repo',
+                          description: '',
+                          stars: 0,
+                          forks: 0
+                        }
+                      ])
+                    }
+                  >
+                    Add Repo
+                  </Button>
                 </div>
               </div>
             )}
@@ -259,19 +472,59 @@ export default function Home() {
             {template === 'event-promo' && (
               <div className="mt-6 space-y-3">
                 <div className="font-semibold">Event Details</div>
-                <input className="w-full rounded border px-2 py-1" placeholder="Event name" value={eventName} onChange={(e) => setEventName(e.target.value)} />
-                <input className="w-full rounded border px-2 py-1" placeholder="Event subtitle (optional)" value={eventSubtitle} onChange={(e) => setEventSubtitle(e.target.value)} />
-                <textarea className="w-full rounded border px-2 py-1" placeholder="Event description" value={eventDescription} onChange={(e) => setEventDescription(e.target.value)} />
-                <input className="w-full rounded border px-2 py-1" placeholder="Date and time" value={eventDateTime} onChange={(e) => setEventDateTime(e.target.value)} />
-                <input className="w-full rounded border px-2 py-1" placeholder="Venue" value={eventVenue} onChange={(e) => setEventVenue(e.target.value)} />
+                <input
+                  className="w-full rounded border px-2 py-1"
+                  placeholder="Event name"
+                  value={eventName}
+                  onChange={(e) => setEventName(e.target.value)}
+                />
+                <input
+                  className="w-full rounded border px-2 py-1"
+                  placeholder="Event subtitle (optional)"
+                  value={eventSubtitle}
+                  onChange={(e) => setEventSubtitle(e.target.value)}
+                />
+                <textarea
+                  className="w-full rounded border px-2 py-1"
+                  placeholder="Event description"
+                  value={eventDescription}
+                  onChange={(e) => setEventDescription(e.target.value)}
+                />
+                <input
+                  className="w-full rounded border px-2 py-1"
+                  placeholder="Date and time"
+                  value={eventDateTime}
+                  onChange={(e) => setEventDateTime(e.target.value)}
+                />
+                <input
+                  className="w-full rounded border px-2 py-1"
+                  placeholder="Venue"
+                  value={eventVenue}
+                  onChange={(e) => setEventVenue(e.target.value)}
+                />
 
                 <div className="pt-2 grid grid-cols-1 gap-3 text-sm">
                   <div>
                     <div className="font-semibold">Background</div>
                     <div className="mt-1 flex flex-wrap gap-2">
-                      {(['teal','coral','yellow','navy','offwhite'] as WDSColor[]).map((c) => (
-                        <button key={c} type="button" onClick={() => setEventBgColor(c)} className={`flex items-center gap-2 rounded border px-2 py-1 ${eventBgColor===c?'border-black':'border-gray-300'}`}>
-                          <span className={`inline-block h-4 w-4 rounded ${colorBgClass[c]}`} />
+                      {(
+                        [
+                          'teal',
+                          'coral',
+                          'yellow',
+                          'navy',
+                          'offwhite'
+                        ] as WDSColor[]
+                      ).map((c) => (
+                        <button
+                          key={c}
+                          type="button"
+                          onClick={() => setEventBgColor(c)}
+                          className={`flex items-center gap-2 rounded border px-2 py-1 ${eventBgColor === c ? 'border-black' : 'border-gray-300'}`}
+                        >
+                          <span
+                            className={`inline-block h-4 w-4 rounded ${colorBgClass[c]}`}
+                          />
                           <span>{c}</span>
                         </button>
                       ))}
@@ -281,8 +534,15 @@ export default function Home() {
                     <div className="font-semibold">CTA</div>
                     <div className="mt-1 flex flex-wrap gap-2">
                       {eventOtherOptions.map((c) => (
-                        <button key={c} type="button" onClick={() => setEventCtaColor(c)} className={`flex items-center gap-2 rounded border px-2 py-1 ${eventCtaColor===c?'border-black':'border-gray-300'}`}>
-                          <span className={`inline-block h-4 w-4 rounded ${colorBgClass[c]}`} />
+                        <button
+                          key={c}
+                          type="button"
+                          onClick={() => setEventCtaColor(c)}
+                          className={`flex items-center gap-2 rounded border px-2 py-1 ${eventCtaColor === c ? 'border-black' : 'border-gray-300'}`}
+                        >
+                          <span
+                            className={`inline-block h-4 w-4 rounded ${colorBgClass[c]}`}
+                          />
                           <span>{c}</span>
                         </button>
                       ))}
@@ -292,8 +552,15 @@ export default function Home() {
                     <div className="font-semibold">Title</div>
                     <div className="mt-1 flex flex-wrap gap-2">
                       {eventOtherOptions.map((c) => (
-                        <button key={c} type="button" onClick={() => setEventTitleColor(c)} className={`flex items-center gap-2 rounded border px-2 py-1 ${eventTitleColor===c?'border-black':'border-gray-300'}`}>
-                          <span className={`inline-block h-4 w-4 rounded ${colorBgClass[c]}`} />
+                        <button
+                          key={c}
+                          type="button"
+                          onClick={() => setEventTitleColor(c)}
+                          className={`flex items-center gap-2 rounded border px-2 py-1 ${eventTitleColor === c ? 'border-black' : 'border-gray-300'}`}
+                        >
+                          <span
+                            className={`inline-block h-4 w-4 rounded ${colorBgClass[c]}`}
+                          />
                           <span>{c}</span>
                         </button>
                       ))}
@@ -303,8 +570,15 @@ export default function Home() {
                     <div className="font-semibold">Badges: Allies</div>
                     <div className="mt-1 flex flex-wrap gap-2">
                       {eventOtherOptions.map((c) => (
-                        <button key={c} type="button" onClick={() => setAlliesBadgeColor(c)} className={`flex items-center gap-2 rounded border px-2 py-1 ${alliesBadgeColor===c?'border-black':'border-gray-300'}`}>
-                          <span className={`inline-block h-4 w-4 rounded ${colorBgClass[c]}`} />
+                        <button
+                          key={c}
+                          type="button"
+                          onClick={() => setAlliesBadgeColor(c)}
+                          className={`flex items-center gap-2 rounded border px-2 py-1 ${alliesBadgeColor === c ? 'border-black' : 'border-gray-300'}`}
+                        >
+                          <span
+                            className={`inline-block h-4 w-4 rounded ${colorBgClass[c]}`}
+                          />
                           <span>{c}</span>
                         </button>
                       ))}
@@ -314,8 +588,15 @@ export default function Home() {
                     <div className="font-semibold">Badges: Nursing Room</div>
                     <div className="mt-1 flex flex-wrap gap-2">
                       {eventOtherOptions.map((c) => (
-                        <button key={c} type="button" onClick={() => setNursingBadgeColor(c)} className={`flex items-center gap-2 rounded border px-2 py-1 ${nursingBadgeColor===c?'border-black':'border-gray-300'}`}>
-                          <span className={`inline-block h-4 w-4 rounded ${colorBgClass[c]}`} />
+                        <button
+                          key={c}
+                          type="button"
+                          onClick={() => setNursingBadgeColor(c)}
+                          className={`flex items-center gap-2 rounded border px-2 py-1 ${nursingBadgeColor === c ? 'border-black' : 'border-gray-300'}`}
+                        >
+                          <span
+                            className={`inline-block h-4 w-4 rounded ${colorBgClass[c]}`}
+                          />
                           <span>{c}</span>
                         </button>
                       ))}
@@ -325,8 +606,15 @@ export default function Home() {
                     <div className="font-semibold">Badges: Parents & Kids</div>
                     <div className="mt-1 flex flex-wrap gap-2">
                       {eventOtherOptions.map((c) => (
-                        <button key={c} type="button" onClick={() => setParentsBadgeColor(c)} className={`flex items-center gap-2 rounded border px-2 py-1 ${parentsBadgeColor===c?'border-black':'border-gray-300'}`}>
-                          <span className={`inline-block h-4 w-4 rounded ${colorBgClass[c]}`} />
+                        <button
+                          key={c}
+                          type="button"
+                          onClick={() => setParentsBadgeColor(c)}
+                          className={`flex items-center gap-2 rounded border px-2 py-1 ${parentsBadgeColor === c ? 'border-black' : 'border-gray-300'}`}
+                        >
+                          <span
+                            className={`inline-block h-4 w-4 rounded ${colorBgClass[c]}`}
+                          />
                           <span>{c}</span>
                         </button>
                       ))}
@@ -336,8 +624,15 @@ export default function Home() {
                     <div className="font-semibold">Badges: Non-coders</div>
                     <div className="mt-1 flex flex-wrap gap-2">
                       {eventOtherOptions.map((c) => (
-                        <button key={c} type="button" onClick={() => setNonCodersBadgeColor(c)} className={`flex items-center gap-2 rounded border px-2 py-1 ${nonCodersBadgeColor===c?'border-black':'border-gray-300'}`}>
-                          <span className={`inline-block h-4 w-4 rounded ${colorBgClass[c]}`} />
+                        <button
+                          key={c}
+                          type="button"
+                          onClick={() => setNonCodersBadgeColor(c)}
+                          className={`flex items-center gap-2 rounded border px-2 py-1 ${nonCodersBadgeColor === c ? 'border-black' : 'border-gray-300'}`}
+                        >
+                          <span
+                            className={`inline-block h-4 w-4 rounded ${colorBgClass[c]}`}
+                          />
                           <span>{c}</span>
                         </button>
                       ))}
@@ -348,8 +643,15 @@ export default function Home() {
                     <div className="font-semibold">WDS Logo Color</div>
                     <div className="mt-1 flex flex-wrap gap-2">
                       {eventOtherOptions.map((c) => (
-                        <button key={c} type="button" onClick={() => setLogoColor(c)} className={`flex items-center gap-2 rounded border px-2 py-1 ${logoColor===c?'border-black':'border-gray-300'}`}>
-                          <span className={`inline-block h-4 w-4 rounded ${colorBgClass[c]}`} />
+                        <button
+                          key={c}
+                          type="button"
+                          onClick={() => setLogoColor(c)}
+                          className={`flex items-center gap-2 rounded border px-2 py-1 ${logoColor === c ? 'border-black' : 'border-gray-300'}`}
+                        >
+                          <span
+                            className={`inline-block h-4 w-4 rounded ${colorBgClass[c]}`}
+                          />
                           <span>{c}</span>
                         </button>
                       ))}
@@ -361,28 +663,75 @@ export default function Home() {
                   <div className="font-semibold">Speakers</div>
                   <div className="mt-2 flex items-center gap-2 text-sm">
                     <span>Count:</span>
-                    {[1,2,3].map((n) => (
-                      <Button key={n} size="sm" variant={speakerCount === n ? 'default' : 'outline'} onClick={() => {
-                        setSpeakerCount(n as 1|2|3)
-                        setSpeakers((prev: Speaker[]) => {
-                          const next = [...prev]
-                          next.length = n
-                          for (let i=0;i<n;i++) if (!next[i]) next[i] = { name: `Speaker ${i+1}`, title: '', imageUrl: '' }
-                          return next
-                        })
-                      }}>{n}</Button>
+                    {[1, 2, 3].map((n) => (
+                      <Button
+                        key={n}
+                        size="sm"
+                        variant={speakerCount === n ? 'default' : 'outline'}
+                        onClick={() => {
+                          setSpeakerCount(n as 1 | 2 | 3)
+                          setSpeakers((prev: Speaker[]) => {
+                            const next = [...prev]
+                            next.length = n
+                            for (let i = 0; i < n; i++)
+                              if (!next[i])
+                                next[i] = {
+                                  name: `Speaker ${i + 1}`,
+                                  title: '',
+                                  imageUrl: ''
+                                }
+                            return next
+                          })
+                        }}
+                      >
+                        {n}
+                      </Button>
                     ))}
                   </div>
                   <div className="mt-2 flex flex-col gap-3">
                     {Array.from({ length: speakerCount }).map((_, i) => (
                       <div key={i} className="rounded-lg border p-3">
                         <div className="grid grid-cols-3 gap-2">
-                          <input className="rounded border px-2 py-1" placeholder="Image URL" value={speakers[i]?.imageUrl || ''}
-                            onChange={(e) => setSpeakers((prev: Speaker[]) => prev.map((s, idx) => idx === i ? { ...s, imageUrl: e.target.value } : s))} />
-                          <input className="rounded border px-2 py-1" placeholder="Name" value={speakers[i]?.name || ''}
-                            onChange={(e) => setSpeakers((prev: Speaker[]) => prev.map((s, idx) => idx === i ? { ...s, name: e.target.value } : s))} />
-                          <input className="rounded border px-2 py-1" placeholder="Title" value={speakers[i]?.title || ''}
-                            onChange={(e) => setSpeakers((prev: Speaker[]) => prev.map((s, idx) => idx === i ? { ...s, title: e.target.value } : s))} />
+                          <input
+                            className="rounded border px-2 py-1"
+                            placeholder="Image URL"
+                            value={speakers[i]?.imageUrl || ''}
+                            onChange={(e) =>
+                              setSpeakers((prev: Speaker[]) =>
+                                prev.map((s, idx) =>
+                                  idx === i
+                                    ? { ...s, imageUrl: e.target.value }
+                                    : s
+                                )
+                              )
+                            }
+                          />
+                          <input
+                            className="rounded border px-2 py-1"
+                            placeholder="Name"
+                            value={speakers[i]?.name || ''}
+                            onChange={(e) =>
+                              setSpeakers((prev: Speaker[]) =>
+                                prev.map((s, idx) =>
+                                  idx === i ? { ...s, name: e.target.value } : s
+                                )
+                              )
+                            }
+                          />
+                          <input
+                            className="rounded border px-2 py-1"
+                            placeholder="Title"
+                            value={speakers[i]?.title || ''}
+                            onChange={(e) =>
+                              setSpeakers((prev: Speaker[]) =>
+                                prev.map((s, idx) =>
+                                  idx === i
+                                    ? { ...s, title: e.target.value }
+                                    : s
+                                )
+                              )
+                            }
+                          />
                         </div>
                       </div>
                     ))}
@@ -393,18 +742,47 @@ export default function Home() {
                   <div className="font-semibold">Audience</div>
                   <div className="mt-2 flex gap-2">
                     {['Women only', 'Allies welcome'].map((v) => (
-                      <Button key={v} size="sm" variant={audienceType === v ? 'default' : 'outline'} onClick={() => setAudienceType(v as 'Women only' | 'Allies welcome')}>{v}</Button>
+                      <Button
+                        key={v}
+                        size="sm"
+                        variant={audienceType === v ? 'default' : 'outline'}
+                        onClick={() =>
+                          setAudienceType(v as 'Women only' | 'Allies welcome')
+                        }
+                      >
+                        {v}
+                      </Button>
                     ))}
-                    <Button size="sm" variant={audienceType === '' ? 'default' : 'outline'} onClick={() => setAudienceType('')}>None</Button>
+                    <Button
+                      size="sm"
+                      variant={audienceType === '' ? 'default' : 'outline'}
+                      onClick={() => setAudienceType('')}
+                    >
+                      None
+                    </Button>
                   </div>
                 </div>
 
                 <div>
                   <div className="font-semibold">Facilities</div>
                   <div className="mt-2 grid grid-cols-1 gap-2 text-sm">
-                    {['Private nursing room', 'Parents & kids welcome', 'Non-coders welcome'].map((f) => (
+                    {[
+                      'Private nursing room',
+                      'Parents & kids welcome',
+                      'Non-coders welcome'
+                    ].map((f) => (
                       <label key={f} className="flex items-center gap-2">
-                        <input type="checkbox" checked={facilities.includes(f)} onChange={(e) => setFacilities((prev: string[]) => e.target.checked ? [...prev, f] : prev.filter((x) => x !== f))} />
+                        <input
+                          type="checkbox"
+                          checked={facilities.includes(f)}
+                          onChange={(e) =>
+                            setFacilities((prev: string[]) =>
+                              e.target.checked
+                                ? [...prev, f]
+                                : prev.filter((x) => x !== f)
+                            )
+                          }
+                        />
                         <span>{f}</span>
                       </label>
                     ))}
@@ -415,8 +793,19 @@ export default function Home() {
                   <div className="font-semibold">Partner Logos</div>
                   <div className="mt-2 grid grid-cols-2 gap-2">
                     {partnerLogos.map((url, i) => (
-                      <input key={i} className="w-full rounded border px-2 py-1" placeholder={`Logo ${i+1} URL`} value={url}
-                        onChange={(e) => setPartnerLogos((prev: string[]) => prev.map((u, idx) => idx === i ? e.target.value : u))} />
+                      <input
+                        key={i}
+                        className="w-full rounded border px-2 py-1"
+                        placeholder={`Logo ${i + 1} URL`}
+                        value={url}
+                        onChange={(e) =>
+                          setPartnerLogos((prev: string[]) =>
+                            prev.map((u, idx) =>
+                              idx === i ? e.target.value : u
+                            )
+                          )
+                        }
+                      />
                     ))}
                   </div>
                 </div>
@@ -424,13 +813,22 @@ export default function Home() {
                 <div>
                   <div className="font-semibold">CTA</div>
                   <div className="mt-2 grid grid-cols-1 gap-2">
-                    <input className="w-full rounded border px-2 py-1" placeholder="CTA text" value={ctaText} onChange={(e) => setCtaText(e.target.value)} />
-                    <input className="w-full rounded border px-2 py-1" placeholder="Link text (optional)" value={eventLinkText} onChange={(e) => setEventLinkText(e.target.value)} />
+                    <input
+                      className="w-full rounded border px-2 py-1"
+                      placeholder="CTA text"
+                      value={ctaText}
+                      onChange={(e) => setCtaText(e.target.value)}
+                    />
+                    <input
+                      className="w-full rounded border px-2 py-1"
+                      placeholder="Link text (optional)"
+                      value={eventLinkText}
+                      onChange={(e) => setEventLinkText(e.target.value)}
+                    />
                   </div>
                 </div>
               </div>
             )}
-
 
             <div className="mt-6">
               <ExportButton targetId="canvas" fileName={fileBase} />
@@ -438,7 +836,10 @@ export default function Home() {
           </div>
 
           <div className="md:col-span-2 rounded-xl border bg-white p-4">
-            <ScaledPreview width={platformSizes[platform].width} height={platformSizes[platform].height}>
+            <ScaledPreview
+              width={platformSizes[platform].width}
+              height={platformSizes[platform].height}
+            >
               {template === 'event-promo' && (
                 <EventPromo
                   platform={platform}
@@ -465,7 +866,18 @@ export default function Home() {
                 />
               )}
               {template === 'github' && (
-                <GitHub platform={platform} repos={repos} titleText={hackTitleText} subtitleText={hackSubtitleText} bgColor={hackBgColor} ctaColor={hackCtaColor} titleColor={hackTitleColor} linkText={hackLinkText} logoColor={logoColor} decorVariant={decorVariant} />
+                <GitHub
+                  platform={platform}
+                  repos={repos}
+                  titleText={hackTitleText}
+                  subtitleText={hackSubtitleText}
+                  bgColor={hackBgColor}
+                  ctaColor={hackCtaColor}
+                  titleColor={hackTitleColor}
+                  linkText={hackLinkText}
+                  logoColor={logoColor}
+                  decorVariant={decorVariant}
+                />
               )}
             </ScaledPreview>
           </div>

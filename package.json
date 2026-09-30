@@ -2,14 +2,17 @@
   "name": "women-devs-sg-content-generator",
   "private": true,
   "version": "0.1.0",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
     "postinstall": "shx rm -rf .next/cache || true",
     "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "lint:fix": "eslint . --fix "
   },
   "dependencies": {

@@ -12,6 +12,7 @@ By contributing, you agree to follow our [Code of Conduct](.github/CODE_OF_CONDU
 - [Getting Started](#getting-started)
 - [Working with Issues](#working-with-issues)
 - [Setting Up Your Local Environment](#setting-up-your-local-environment)
+- [Code Style and Formatting](#code-style-and-formatting)
 - [Working on Templates](#working-on-templates)
 - [Creating a Pull Request](#creating-a-pull-request)
 - [Awaiting Review](#awaiting-review)
@@ -136,16 +137,28 @@ To work on an issue:
 7. Before opening a PR, run these checks (CI runs them too):
 
    ```bash
+   npm run format:check
    npm run lint
    npm run typecheck
    npm run build
    ```
 
-   If lint fails, `npm run lint:fix` can fix many problems automatically. Please run `npx prettier --write` on the files you changed, rather than `npm run format` on the whole repo, so your PR stays focused.
+   If the format check fails, run `npm run format`. If lint fails, `npm run lint:fix` can fix many problems automatically. See [Code Style and Formatting](#code-style-and-formatting) for details.
 
    There is no automated test suite. For UI changes, check your change in the browser on **every platform size** (Instagram post, Instagram story, Meetup banner, LinkedIn cover) and **export a PNG** to confirm the output matches the preview.
 
 AI-assisted contributions follow the same review process. Verify generated changes yourself and describe the checks you actually ran in your PR.
+
+---
+
+## Code Style and Formatting
+
+We use [Prettier](https://prettier.io/) to format code and [ESLint](https://eslint.org/) to catch problems, so you don't need to worry about style by hand.
+
+- **Formatting:** Run `npm run format` to format the repo using the settings in `.prettierrc` (no semicolons, single quotes, 2-space indentation, 80-character lines). You can also turn on format-on-save in your editor with the Prettier extension.
+- **Linting:** Run `npm run lint`. If it fails, `npm run lint:fix` can fix many problems automatically; fix the rest by hand.
+- **CI:** Every PR runs `npm run format:check` and `npm run lint`. If either fails, run the commands above, commit the result, and push again.
+- **Keep PRs focused:** Formatting should only change the files you worked on. If `npm run format` changes other files, leave those changes out of your PR.
 
 ---
 

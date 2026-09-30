@@ -1,2 +1,6 @@
-.card { @apply block w-full rounded-xl bg-white shadow border border-black/10 p-8; }
-.stats { @apply text-4xl text-black/60; }
+.card {
+  @apply block w-full rounded-xl bg-white shadow border border-black/10 p-8;
+}
+.stats {
+  @apply text-4xl text-black/60;
+}
