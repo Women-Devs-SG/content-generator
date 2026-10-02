@@ -1,0 +1,7 @@
+# Security reports must not be filed as public issues.
+# Use the repository's Security tab, then go to "Report a vulnerability" (see SECURITY.md).
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Ask a question in the WDS Telegram group
+    url: https://t.me/+hh3Fts4oDG41NzQ1
+    about: Chat with the community and maintainers.

@@ -27,7 +27,9 @@ export default function ExportButton({ targetId, fileName }: Props) {
   return (
     <div className="flex gap-2">
       <Button onClick={doPNG}>Export PNG</Button>
-      <Button variant="outline" onClick={doSVG}>Export SVG</Button>
+      <Button variant="outline" onClick={doSVG}>
+        Export SVG
+      </Button>
     </div>
   )
 }

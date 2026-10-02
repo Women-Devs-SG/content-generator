@@ -1,0 +1,43 @@
+name: '📝 Documentation improvement'
+description: Suggest a correction or improvement to the project documentation.
+title: '[Docs]: '
+labels:
+  - documentation
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping make the Content Generator easier to use and contribute to.
+
+        Before offering to implement a change, please review our [contribution guidelines](https://github.com/Women-Devs-SG/content-generator/blob/main/CONTRIBUTING.md):
+
+          - Do not begin work until a maintainer assigns the issue to you.
+          - Commenting or submitting this request does not count as assignment.
+          - Issues labelled `women-devs-only` are reserved for women developers.
+
+        You are welcome to report a documentation issue even if you do not intend to fix it.
+
+  - type: input
+    id: location
+    attributes:
+      label: Documentation location
+      description: Link to the page or provide the file name and section heading.
+      placeholder: 'Example: CONTRIBUTING.md — Working on Templates'
+    validations:
+      required: true
+
+  - type: textarea
+    id: issue
+    attributes:
+      label: Documentation issue
+      description: Explain what is missing, unclear, inaccurate, outdated, or difficult to follow.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-change
+    attributes:
+      label: Proposed improvement
+      description: Describe the change you recommend. Include suggested wording if you have it.

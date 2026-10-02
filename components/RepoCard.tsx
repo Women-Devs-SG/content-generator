@@ -34,7 +34,9 @@ export default function RepoCard({
   return (
     <div className="block w-full rounded-xl bg-white shadow border border-black/10 p-6">
       <div className="flex items-center justify-between">
-        <div className="font-semibold" style={{ fontSize: sizes.body }}>{name}</div>
+        <div className="font-semibold" style={{ fontSize: sizes.body }}>
+          {name}
+        </div>
         <div className="text-black/60" style={{ fontSize: sizes.caption }}>
           ⭐ {stars} · 🍴 {forks}
         </div>
@@ -44,17 +46,35 @@ export default function RepoCard({
           {description}
         </div>
       )}
-      <div className="mt-3 flex flex-wrap items-center gap-3" style={{ fontSize: sizes.caption }}>
+      <div
+        className="mt-3 flex flex-wrap items-center gap-3"
+        style={{ fontSize: sizes.caption }}
+      >
         <div className="flex items-center gap-2">
-          <span className="badge merged-prs" style={{ fontSize: sizes.caption }}>merged prs</span>
+          <span
+            className="badge merged-prs"
+            style={{ fontSize: sizes.caption }}
+          >
+            merged prs
+          </span>
           <strong>{prMerged}</strong>
         </div>
         <div className="flex items-center gap-2">
-          <span className="badge open-issues" style={{ fontSize: sizes.caption }}>open issues</span>
+          <span
+            className="badge open-issues"
+            style={{ fontSize: sizes.caption }}
+          >
+            open issues
+          </span>
           <strong>{openIssues}</strong>
         </div>
         <div className="flex items-center gap-2">
-          <span className="badge good-first-issues" style={{ fontSize: sizes.caption }}>good first issues</span>
+          <span
+            className="badge good-first-issues"
+            style={{ fontSize: sizes.caption }}
+          >
+            good first issues
+          </span>
           <strong>{goodFirstIssues}</strong>
         </div>
       </div>

@@ -7,7 +7,12 @@ type Props = PropsWithChildren<{
   maxVH?: number // portion of viewport height to use, e.g. 0.8
 }>
 
-export default function ScaledPreview({ width, height, maxVH = 0.8, children }: Props) {
+export default function ScaledPreview({
+  width,
+  height,
+  maxVH = 0.8,
+  children,
+}: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const [containerW, setContainerW] = useState<number>(0)
   const [viewportH, setViewportH] = useState<number>(0)
@@ -44,7 +49,14 @@ export default function ScaledPreview({ width, height, maxVH = 0.8, children }: 
   return (
     <div ref={containerRef} className="w-full h-full overflow-auto">
       <div style={{ width: width * scale, height: height * scale }}>
-        <div style={{ width, height, transform: `scale(${scale})`, transformOrigin: 'top left' }}>
+        <div
+          style={{
+            width,
+            height,
+            transform: `scale(${scale})`,
+            transformOrigin: 'top left',
+          }}
+        >
           {children}
         </div>
       </div>

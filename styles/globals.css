@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --wdsg-teal: #0B6E4F;
-  --wdsg-coral: #CF5333;
-  --wdsg-yellow: #FFAE03;
-  --wdsg-navy: #05299E;
-  --wdsg-offwhite: #FFFBFF;
+  --wdsg-teal: #0b6e4f;
+  --wdsg-coral: #cf5333;
+  --wdsg-yellow: #ffae03;
+  --wdsg-navy: #05299e;
+  --wdsg-offwhite: #fffbff;
 }
 
 @font-face {
@@ -20,7 +20,8 @@
 
 @font-face {
   font-family: 'Montserrat';
-  src: url('/fonts/Montserrat/static/Montserrat-SemiBold.ttf') format('truetype');
+  src: url('/fonts/Montserrat/static/Montserrat-SemiBold.ttf')
+    format('truetype');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -34,7 +35,9 @@
   font-display: swap;
 }
 
-html, body, #__next {
+html,
+body,
+#__next {
   height: 100%;
 }
 
@@ -44,30 +47,39 @@ html, body, #__next {
   line-height: 0.9;
   font-family: 'Montserrat', sans-serif;
 }
-.logo .women { 
-  font-weight: 700; 
-  font-size: 58px; 
+.logo .women {
+  font-weight: 700;
+  font-size: 58px;
 }
-.logo .devs { 
-  font-weight: 700; 
-  font-size: 90px; 
+.logo .devs {
+  font-weight: 700;
+  font-size: 90px;
 }
-.logo .singapore { 
-  font-weight: 400; 
-  font-size: 42px; 
-}
-
-.badge { 
-  display: inline-block; 
-  padding: 4px 10px; 
-  margin: 2px; 
-  border-radius: 999px; 
-  font-size: 25px; 
-  background: #F5F5F5; 
-  color: #212121; 
-  opacity: 0.7
+.logo .singapore {
+  font-weight: 400;
+  font-size: 42px;
 }
 
-.badge.open-issues { background: var(--wdsg-navy); color: white; }
-.badge.merged-prs { background: var(--wdsg-teal); color: white; }
-.badge.good-first-issues { background: var(--wdsg-yellow); color: white; }
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  margin: 2px;
+  border-radius: 999px;
+  font-size: 25px;
+  background: #f5f5f5;
+  color: #212121;
+  opacity: 0.7;
+}
+
+.badge.open-issues {
+  background: var(--wdsg-navy);
+  color: white;
+}
+.badge.merged-prs {
+  background: var(--wdsg-teal);
+  color: white;
+}
+.badge.good-first-issues {
+  background: var(--wdsg-yellow);
+  color: white;
+}

@@ -1,0 +1,45 @@
+name: 🌟 Feature request
+description: Suggest an improvement to the editor, export, or existing templates.
+title: '[Feature]: '
+labels: [enhancement]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping improve the Content Generator!
+
+        Before proposing to implement this feature, please review our [contribution guidelines](https://github.com/Women-Devs-SG/content-generator/blob/main/CONTRIBUTING.md):
+
+          - Do not begin implementation until a maintainer assigns the issue to you.
+          - Commenting or submitting this request does not count as assignment.
+          - Issues labelled `women-devs-only` are reserved for women developers. As our mission is to empower women in tech, we hold this space for them.
+
+        You are welcome to submit an idea even if you do not intend to implement it. For a brand-new template, use the **Template request** form instead.
+
+        ***
+
+  - type: textarea
+    id: need
+    attributes:
+      label: Problem or need
+      description: What problem or workflow would this feature improve?
+      placeholder: Describe who experiences the problem and why it matters.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe the behavior or outcome you would like to see.
+      placeholder: Explain what should happen from the user's perspective.
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Add relevant examples, mockups, or screenshots.
