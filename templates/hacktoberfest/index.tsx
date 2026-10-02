@@ -40,7 +40,7 @@ export default function GitHub({
   titleColor = 'teal',
   linkText = '👉github.com/orgs/Women-Devs-SG👈',
   logoColor,
-  decorVariant = 'playful'
+  decorVariant = 'playful',
 }: Props) {
   const size = platformSizes[platform]
   const type = getTypeScale(platform)
@@ -51,7 +51,7 @@ export default function GitHub({
     yellow: 'bg-brand-yellow',
     navy: 'bg-brand-navy',
     offwhite: 'bg-brand-offwhite',
-    black: 'bg-black'
+    black: 'bg-black',
   }
   const textClass: Record<WDSColor, string> = {
     teal: 'text-brand-teal',
@@ -59,7 +59,7 @@ export default function GitHub({
     yellow: 'text-brand-yellow',
     navy: 'text-brand-navy',
     offwhite: 'text-brand-offwhite',
-    black: 'text-black'
+    black: 'text-black',
   }
 
   // Layout rules by platform

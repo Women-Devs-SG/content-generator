@@ -11,11 +11,11 @@ import { WDSColor } from '@/lib/colors'
 
 const templates = [
   { key: 'event-promo', label: 'Event Promotion' },
-  { key: 'github', label: 'Contribute to Our GitHub' }
+  { key: 'github', label: 'Contribute to Our GitHub' },
 ] as const
 
 const platforms: { key: PlatformKey; label: string }[] = Object.entries(
-  platformSizes
+  platformSizes,
 ).map(([k, v]) => ({ key: k as PlatformKey, label: v.label }))
 
 type TemplateKey = (typeof templates)[number]['key']
@@ -28,7 +28,7 @@ export default function Home() {
   const [eventName, setEventName] = useState('AI Workshop')
   const [eventSubtitle, setEventSubtitle] = useState('What are LLMs?')
   const [eventDescription, setEventDescription] = useState(
-    'Join us for a panel and networking session on building inclusive tech communities.'
+    'Join us for a panel and networking session on building inclusive tech communities.',
   )
   const [eventDateTime, setEventDateTime] = useState('Thu, 24 Oct · 7:00 PM')
   const [eventVenue, setEventVenue] = useState('Somewhere, Singapore')
@@ -36,19 +36,19 @@ export default function Home() {
   const [speakers, setSpeakers] = useState<Speaker[]>([
     { name: 'Aisha Lee', title: 'Senior Engineer, ACME', imageUrl: '' },
     { name: 'Mei Chen', title: 'Developer Advocate, Foo', imageUrl: '' },
-    { name: 'Anita S.', title: 'Product Engineer, Bar', imageUrl: '' }
+    { name: 'Anita S.', title: 'Product Engineer, Bar', imageUrl: '' },
   ])
   const [audienceType, setAudienceType] = useState<
     'Women only' | 'Allies welcome' | ''
   >('Allies welcome')
   const [facilities, setFacilities] = useState<string[]>([
     'Private nursing room',
-    'Parents & kids welcome'
+    'Parents & kids welcome',
   ])
   const [partnerLogos, setPartnerLogos] = useState<string[]>(['', ''])
   const [ctaText, setCtaText] = useState('Sign up on Meetup')
   const [eventLinkText, setEventLinkText] = useState<string>(
-    '👉meetup.com/women-devs-sg/👈'
+    '👉meetup.com/women-devs-sg/👈',
   )
   const [decorVariant, setDecorVariant] = useState<
     'playful' | 'tech' | 'games' | 'women'
@@ -60,26 +60,26 @@ export default function Home() {
       name: '🤖volunteer-telegram-bot',
       description: 'Telegram bot for volunteer management for Women Devs SG',
       stars: 12,
-      forks: 13
+      forks: 13,
     },
     {
       name: '🍼bibsnbub',
       description:
         'An app to help parents find childcare facilities in Singapore!',
       stars: 11,
-      forks: 14
+      forks: 14,
     },
     {
       name: '👩‍💻womendevssg',
       description: 'Website for womendevssg',
       stars: 14,
-      forks: 18
-    }
+      forks: 18,
+    },
   ])
   const [hackTitleText, setHackTitleText] = useState('Hacktoberfest🎉')
   const [hackSubtitleText, setHackSubtitleText] = useState('📅1–31 October')
   const [hackLinkText, setHackLinkText] = useState(
-    '👉github.com/orgs/Women-Devs-SG👈'
+    '👉github.com/orgs/Women-Devs-SG👈',
   )
 
   // Logo customization (applies to all templates)
@@ -89,7 +89,7 @@ export default function Home() {
     yellow: 'bg-brand-yellow',
     navy: 'bg-brand-navy',
     offwhite: 'bg-brand-offwhite',
-    black: 'bg-black'
+    black: 'bg-black',
   }
   const [logoColor, setLogoColor] = useState<WDSColor>('navy')
 
@@ -110,7 +110,7 @@ export default function Home() {
   const palette: WDSColor[] = ['teal', 'coral', 'yellow', 'navy', 'offwhite']
   const hackOtherOptions: WDSColor[] = palette.filter((c) => c !== hackBgColor)
   const eventOtherOptions: WDSColor[] = palette.filter(
-    (c) => c !== eventBgColor
+    (c) => c !== eventBgColor,
   )
   const hackLogoOptions: WDSColor[] = palette.filter((c) => c !== hackBgColor)
   const eventLogoOptions: WDSColor[] = palette.filter((c) => c !== eventBgColor)
@@ -201,7 +201,7 @@ export default function Home() {
                   { key: 'playful', label: 'Shapes' },
                   { key: 'tech', label: 'Tech Emojis' },
                   { key: 'games', label: 'Game Emojis' },
-                  { key: 'women', label: 'Women Emojis' }
+                  { key: 'women', label: 'Women Emojis' },
                 ] as const
               ).map((opt) => (
                 <Button
@@ -245,7 +245,7 @@ export default function Home() {
                           'coral',
                           'yellow',
                           'navy',
-                          'offwhite'
+                          'offwhite',
                         ] as WDSColor[]
                       ).map((c) => (
                         <button
@@ -329,8 +329,10 @@ export default function Home() {
                           onChange={(e) =>
                             setRepos((prev: RepoCard[]) =>
                               prev.map((it, i) =>
-                                i === idx ? { ...it, name: e.target.value } : it
-                              )
+                                i === idx
+                                  ? { ...it, name: e.target.value }
+                                  : it,
+                              ),
                             )
                           }
                         />
@@ -344,8 +346,8 @@ export default function Home() {
                             prev.map((it, i) =>
                               i === idx
                                 ? { ...it, description: e.target.value }
-                                : it
-                            )
+                                : it,
+                            ),
                           )
                         }
                       />
@@ -360,8 +362,8 @@ export default function Home() {
                               prev.map((it, i) =>
                                 i === idx
                                   ? { ...it, stars: Number(e.target.value) }
-                                  : it
-                              )
+                                  : it,
+                              ),
                             )
                           }
                         />
@@ -375,8 +377,8 @@ export default function Home() {
                               prev.map((it, i) =>
                                 i === idx
                                   ? { ...it, forks: Number(e.target.value) }
-                                  : it
-                              )
+                                  : it,
+                              ),
                             )
                           }
                         />
@@ -392,8 +394,8 @@ export default function Home() {
                               prev.map((it, i) =>
                                 i === idx
                                   ? { ...it, prMerged: Number(e.target.value) }
-                                  : it
-                              )
+                                  : it,
+                              ),
                             )
                           }
                         />
@@ -408,10 +410,10 @@ export default function Home() {
                                 i === idx
                                   ? {
                                       ...it,
-                                      openIssues: Number(e.target.value)
+                                      openIssues: Number(e.target.value),
                                     }
-                                  : it
-                              )
+                                  : it,
+                              ),
                             )
                           }
                         />
@@ -426,10 +428,10 @@ export default function Home() {
                                 i === idx
                                   ? {
                                       ...it,
-                                      goodFirstIssues: Number(e.target.value)
+                                      goodFirstIssues: Number(e.target.value),
                                     }
-                                  : it
-                              )
+                                  : it,
+                              ),
                             )
                           }
                         />
@@ -440,7 +442,7 @@ export default function Home() {
                           size="sm"
                           onClick={() =>
                             setRepos((prev: RepoCard[]) =>
-                              prev.filter((_, i) => i !== idx)
+                              prev.filter((_, i) => i !== idx),
                             )
                           }
                         >
@@ -458,8 +460,8 @@ export default function Home() {
                           name: 'new-repo',
                           description: '',
                           stars: 0,
-                          forks: 0
-                        }
+                          forks: 0,
+                        },
                       ])
                     }
                   >
@@ -513,7 +515,7 @@ export default function Home() {
                           'coral',
                           'yellow',
                           'navy',
-                          'offwhite'
+                          'offwhite',
                         ] as WDSColor[]
                       ).map((c) => (
                         <button
@@ -678,7 +680,7 @@ export default function Home() {
                                 next[i] = {
                                   name: `Speaker ${i + 1}`,
                                   title: '',
-                                  imageUrl: ''
+                                  imageUrl: '',
                                 }
                             return next
                           })
@@ -701,8 +703,8 @@ export default function Home() {
                                 prev.map((s, idx) =>
                                   idx === i
                                     ? { ...s, imageUrl: e.target.value }
-                                    : s
-                                )
+                                    : s,
+                                ),
                               )
                             }
                           />
@@ -713,8 +715,10 @@ export default function Home() {
                             onChange={(e) =>
                               setSpeakers((prev: Speaker[]) =>
                                 prev.map((s, idx) =>
-                                  idx === i ? { ...s, name: e.target.value } : s
-                                )
+                                  idx === i
+                                    ? { ...s, name: e.target.value }
+                                    : s,
+                                ),
                               )
                             }
                           />
@@ -727,8 +731,8 @@ export default function Home() {
                                 prev.map((s, idx) =>
                                   idx === i
                                     ? { ...s, title: e.target.value }
-                                    : s
-                                )
+                                    : s,
+                                ),
                               )
                             }
                           />
@@ -769,7 +773,7 @@ export default function Home() {
                     {[
                       'Private nursing room',
                       'Parents & kids welcome',
-                      'Non-coders welcome'
+                      'Non-coders welcome',
                     ].map((f) => (
                       <label key={f} className="flex items-center gap-2">
                         <input
@@ -779,7 +783,7 @@ export default function Home() {
                             setFacilities((prev: string[]) =>
                               e.target.checked
                                 ? [...prev, f]
-                                : prev.filter((x) => x !== f)
+                                : prev.filter((x) => x !== f),
                             )
                           }
                         />
@@ -801,8 +805,8 @@ export default function Home() {
                         onChange={(e) =>
                           setPartnerLogos((prev: string[]) =>
                             prev.map((u, idx) =>
-                              idx === i ? e.target.value : u
-                            )
+                              idx === i ? e.target.value : u,
+                            ),
                           )
                         }
                       />

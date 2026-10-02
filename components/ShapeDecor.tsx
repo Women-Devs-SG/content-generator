@@ -12,7 +12,7 @@ type Props = { variant?: Variant; absolute?: boolean }
 
 export default function ShapeDecor({
   variant = 'playful',
-  absolute = true
+  absolute = true,
 }: Props) {
   const containerClass = `${absolute ? 'absolute inset-0 z-0' : ''} h-full w-full pointer-events-none`
 
@@ -28,7 +28,7 @@ export default function ShapeDecor({
           style={{
             gridTemplateColumns: `repeat(${cols}, 1fr)`,
             gridTemplateRows: `repeat(${rows}, 1fr)`,
-            gap: 16
+            gap: 16,
           }}
         >
           {Array.from({ length: cells }).map((_, i) => (

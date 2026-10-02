@@ -4,7 +4,7 @@ export const WDScolors = {
   yellow: '#FFAE03',
   navy: '#05299E',
   offwhite: '#FFFBFF',
-  black: '#000000'
+  black: '#000000',
 }
 
 export type WDSColor = keyof typeof WDScolors

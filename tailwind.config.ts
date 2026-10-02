@@ -5,12 +5,12 @@ const config: Config = {
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './templates/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}'
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Montserrat', 'ui-sans-serif', 'system-ui', 'sans-serif']
+        sans: ['Montserrat', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       colors: {
         brand: {
@@ -18,12 +18,12 @@ const config: Config = {
           coral: '#CF5333',
           yellow: '#FFAE03',
           navy: '#05299E',
-          offwhite: '#FFFBFF'
-        }
+          offwhite: '#FFFBFF',
+        },
       },
-      container: { center: true, padding: '1rem' }
-    }
+      container: { center: true, padding: '1rem' },
+    },
   },
-  plugins: []
+  plugins: [],
 }
 export default config

@@ -4,7 +4,7 @@ export async function exportNodeAsPNG(node: HTMLElement, fileName: string) {
   const dataUrl = await toPng(node, {
     cacheBust: true,
     pixelRatio: 1,
-    style: { transform: 'none' }
+    style: { transform: 'none' },
   })
   const link = document.createElement('a')
   link.download = fileName.endsWith('.png') ? fileName : `${fileName}.png`
@@ -15,7 +15,7 @@ export async function exportNodeAsPNG(node: HTMLElement, fileName: string) {
 export async function exportNodeAsSVG(node: HTMLElement, fileName: string) {
   const dataUrl = await toSvg(node, {
     cacheBust: true,
-    style: { transform: 'none' }
+    style: { transform: 'none' },
   })
   const link = document.createElement('a')
   link.download = fileName.endsWith('.svg') ? fileName : `${fileName}.svg`

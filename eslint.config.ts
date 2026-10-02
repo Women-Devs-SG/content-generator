@@ -10,9 +10,9 @@ export default defineConfig([
     files: ['**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
     plugins: { js },
     extends: ['js/recommended'],
-    languageOptions: { globals: { ...globals.browser, ...globals.node } }
+    languageOptions: { globals: { ...globals.browser, ...globals.node } },
   },
   tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
-  { settings: { react: { version: 'detect' } } }
+  { settings: { react: { version: 'detect' } } },
 ])

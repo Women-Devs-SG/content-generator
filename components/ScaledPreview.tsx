@@ -11,7 +11,7 @@ export default function ScaledPreview({
   width,
   height,
   maxVH = 0.8,
-  children
+  children,
 }: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const [containerW, setContainerW] = useState<number>(0)
@@ -54,7 +54,7 @@ export default function ScaledPreview({
             width,
             height,
             transform: `scale(${scale})`,
-            transformOrigin: 'top left'
+            transformOrigin: 'top left',
           }}
         >
           {children}

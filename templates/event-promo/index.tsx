@@ -55,7 +55,7 @@ export default function EventPromo({
   womenBadgeColor = 'coral',
   nonCodersBadgeColor = 'teal',
   linkText = '👉meetup.com/women-devs-sg/👈',
-  decorVariant = 'playful'
+  decorVariant = 'playful',
 }: Props) {
   const size = platformSizes[platform]
   const type = getTypeScale(platform)
@@ -70,7 +70,7 @@ export default function EventPromo({
     yellow: 'bg-brand-yellow',
     navy: 'bg-brand-navy',
     offwhite: 'bg-brand-offwhite',
-    black: 'bg-black'
+    black: 'bg-black',
   }
   const textClass: Record<WDSColor, string> = {
     teal: 'text-brand-teal',
@@ -78,7 +78,7 @@ export default function EventPromo({
     yellow: 'text-brand-yellow',
     navy: 'text-brand-navy',
     offwhite: 'text-brand-offwhite',
-    black: 'text-black'
+    black: 'text-black',
   }
 
   // CSS variable mapping for inline styles to override .badge defaults in globals.css
@@ -88,7 +88,7 @@ export default function EventPromo({
     yellow: 'var(--wdsg-yellow)',
     navy: 'var(--wdsg-navy)',
     offwhite: 'var(--wdsg-offwhite)',
-    black: '#000000'
+    black: '#000000',
   }
   const textOnBg = (c: WDSColor) =>
     c === 'offwhite' || c === 'yellow' ? '#212121' : '#FFFFFF'
@@ -299,7 +299,7 @@ export default function EventPromo({
                     style={{
                       backgroundColor: colorVar[womenBadgeColor],
                       color: textOnBg(womenBadgeColor),
-                      opacity: 1
+                      opacity: 1,
                     }}
                   >
                     Women Only 👩‍💻
@@ -312,7 +312,7 @@ export default function EventPromo({
                       const next = cycle(alliesColor)
                       console.log('Allies badge click', {
                         current: alliesColor,
-                        next
+                        next,
                       })
                       setAlliesColor(next)
                     }}
@@ -320,7 +320,7 @@ export default function EventPromo({
                     style={{
                       backgroundColor: colorVar[alliesColor],
                       color: textOnBg(alliesColor),
-                      opacity: 1
+                      opacity: 1,
                     }}
                   >
                     Allies: Bring a 👩 Friend
@@ -333,7 +333,7 @@ export default function EventPromo({
                       const next = cycle(nonCodersColor)
                       console.log('Non-coders badge click', {
                         current: nonCodersColor,
-                        next
+                        next,
                       })
                       setNonCodersColor(next)
                     }}
@@ -341,7 +341,7 @@ export default function EventPromo({
                     style={{
                       backgroundColor: colorVar[nonCodersColor],
                       color: textOnBg(nonCodersColor),
-                      opacity: 1
+                      opacity: 1,
                     }}
                   >
                     Non-coders Welcome 🙌
@@ -354,7 +354,7 @@ export default function EventPromo({
                       const next = cycle(nursingColor)
                       console.log('Nursing badge click', {
                         current: nursingColor,
-                        next
+                        next,
                       })
                       setNursingColor(next)
                     }}
@@ -362,7 +362,7 @@ export default function EventPromo({
                     style={{
                       backgroundColor: colorVar[nursingColor],
                       color: textOnBg(nursingColor),
-                      opacity: 1
+                      opacity: 1,
                     }}
                   >
                     Nursing Room Available 🍼
@@ -375,7 +375,7 @@ export default function EventPromo({
                       const next = cycle(parentsColor)
                       console.log('Parents badge click', {
                         current: parentsColor,
-                        next
+                        next,
                       })
                       setParentsColor(next)
                     }}
@@ -383,7 +383,7 @@ export default function EventPromo({
                     style={{
                       backgroundColor: colorVar[parentsColor],
                       color: textOnBg(parentsColor),
-                      opacity: 1
+                      opacity: 1,
                     }}
                   >
                     Parents & Kids Welcome 👨‍👩‍👧‍👦

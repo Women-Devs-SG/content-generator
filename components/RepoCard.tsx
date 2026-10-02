@@ -29,7 +29,7 @@ export default function RepoCard({
   prMerged = 0,
   openIssues = 0,
   goodFirstIssues = 0,
-  sizes
+  sizes,
 }: Props) {
   return (
     <div className="block w-full rounded-xl bg-white shadow border border-black/10 p-6">
