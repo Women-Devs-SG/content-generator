@@ -42,7 +42,7 @@ This ensures our Community Coding Month efforts stay aligned with our mission of
 
 ### 💡 Tips for First-Time Contributors
 
-- Look for issues labeled `good first issue`, `hacktoberfest`, or `no-coding-required`.
+- Look for issues labeled `good first issue` or `help wanted`.
 - Read this guide before submitting a PR.
 - Don’t be afraid to ask questions — [maintainers](https://github.com/orgs/Women-Devs-SG/teams/wds-maintainers) are here to help.
 - Start small: even fixing a typo or adding a link counts!
@@ -58,7 +58,7 @@ Before you dive in:
 
 1. **Read Our Code of Conduct:** This ensures a welcoming and collaborative space for everyone.
 2. **Check Existing Issues:** Look for open issues in the repository to see where help is needed.
-3. **Start Small:** We label beginner-friendly issues as `good-first-issue` to help you ease into the project.
+3. **Start Small:** We label beginner-friendly issues as `good first issue` to help you ease into the project.
 4. **Understand the project:** Read the [README](README.md) for setup and the project structure, and try the [live app](https://wds-content-generator.vercel.app/) to see how templates and platforms work.
 5. **Join our Telegram group:** To participate in Community Coding Month activities and connect with the community, please join the **[WDS Telegram group](https://t.me/+hh3Fts4oDG41NzQ1)**.
 
@@ -69,7 +69,7 @@ Before you dive in:
 ### Finding an Issue
 
 - Visit the Issues tab in the repository.
-- Look for issues tagged with `good-first-issue` or `help-wanted`.
+- Look for issues tagged with `good first issue` or `help wanted`.
 - Leave a comment on the issue you'd like to work on, and a maintainer will assign it to you.
 
 ### ❤️ Our Contribution Etiquette
@@ -143,7 +143,7 @@ To work on an issue:
    npm run build
    ```
 
-   If the format check fails, run `npm run format`. If lint fails, `npm run lint:fix` can fix many problems automatically. See [Code Style and Formatting](#code-style-and-formatting) for details.
+   Husky installs a pre-commit hook when `npm ci` runs. The hook checks formatting, lint, and types before each commit; CI runs the checks too for pull requests. If the format check fails, run `npm run format`. If lint fails, `npm run lint:fix` can fix many problems automatically. See [Code Style and Formatting](#code-style-and-formatting) for details.
 
    There is no automated test suite. For UI changes, check your change in the browser on **every platform size** (Instagram post, Instagram story, Meetup banner, LinkedIn cover) and **export a PNG** to confirm the output matches the preview.
 
