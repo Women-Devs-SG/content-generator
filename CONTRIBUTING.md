@@ -145,6 +145,8 @@ To work on an issue:
 
    If the format check fails, run `npm run format`. If lint fails, `npm run lint:fix` can fix many problems automatically. See [Code Style and Formatting](#code-style-and-formatting) for details.
 
+   Husky installs a pre-commit hook when `npm ci` runs. It checks formatting, lint, and types before each commit; CI runs the checks too for pull requests.
+
    There is no automated test suite. For UI changes, check your change in the browser on **every platform size** (Instagram post, Instagram story, Meetup banner, LinkedIn cover) and **export a PNG** to confirm the output matches the preview.
 
 AI-assisted contributions follow the same review process. Verify generated changes yourself and describe the checks you actually ran in your PR.
