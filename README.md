@@ -19,7 +19,7 @@ Requires Node 22 (see `.nvmrc`).
 
 ```bash
 # install deps
-npm install
+npm ci
 
 # run dev server
 npm run dev
